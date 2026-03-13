@@ -135,18 +135,6 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 /* legacy .nav-dot and .nav-av hidden */
 .nav-dot,.nav-av{display:none}
 .user-body{display:flex;flex:1}
-/* Gradient background for main app */
-#screen-user{background:var(--bg);position:relative;}
-#screen-user::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(107,92,246,.13) 0%,transparent 60%),
-             radial-gradient(ellipse 60% 40% at 85% 90%,rgba(131,112,248,.10) 0%,transparent 55%),
-             radial-gradient(ellipse 50% 30% at 50% 50%,rgba(107,92,246,.04) 0%,transparent 70%);}
-[data-theme="light"] #screen-user::before{
-  background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(45,106,79,.10) 0%,transparent 60%),
-             radial-gradient(ellipse 60% 40% at 85% 90%,rgba(45,106,79,.08) 0%,transparent 55%),
-             radial-gradient(ellipse 50% 30% at 50% 50%,rgba(45,106,79,.04) 0%,transparent 70%);}
-.top-nav,.sidebar,.bottom-nav{position:relative;z-index:101;}
-.content-area{position:relative;z-index:1;}
 .sidebar{display:none;width:206px;background:var(--white);border-left:1px solid var(--border);padding:16px 0;flex-direction:column;position:sticky;top:56px;height:calc(100vh - 56px);flex-shrink:0;overflow-y:auto}
 .sb-item{display:flex;align-items:center;gap:9px;padding:11px 18px;font-size:13px;font-weight:500;color:var(--dark-mid);cursor:pointer;border:none;background:none;width:100%;text-align:right;transition:var(--tr);border-right:3px solid transparent;font-family:'SF Arabic',sans-serif}
 .sb-item .ic{font-size:17px}.sb-item:hover{background:var(--olive-xpale);color:var(--olive)}
@@ -159,13 +147,6 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .bn-item .ic{font-size:20px}.bn-item.active{color:var(--olive);font-weight:700}
 .bn-item.active::before{content:'';position:absolute;top:0;left:15%;right:15%;height:2.5px;background:var(--olive);border-radius:0 0 3px 3px}
 .bn-home{flex:0 0 72px;border-left:1px solid var(--border);border-right:1px solid var(--border);background:var(--bg-3);}
-/* للأنثى: nav بعنصرين فقط */
-.bottom-nav.female-nav .bn-group:first-child,
-.bottom-nav.female-nav .bn-memories{display:none;}
-.bottom-nav.female-nav{justify-content:stretch;}
-.bottom-nav.female-nav .bn-home{flex:1;border-left:1px solid var(--border);border-right:none;}
-.bottom-nav.female-nav .bn-group:last-child{flex:1;}
-.bottom-nav.female-nav .bn-group:last-child .bn-item[data-tab="dishes"]{flex:1;}
 @media(min-width:768px){.sidebar{display:flex}.bottom-nav{display:none}.page{padding-bottom:24px}}
 
 /* COMPONENTS */
@@ -253,18 +234,6 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .mem-thumb video{width:100%;height:100%;object-fit:cover}
 .mem-play{position:absolute;font-size:32px;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
 .mem-vid-badge{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.65);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
-.mem-thumb img{cursor:zoom-in}
-/* Lightbox */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;padding:16px;}
-.lightbox.open{display:flex;animation:fadeIn .2s ease}
-.lightbox img{max-width:100%;max-height:90vh;border-radius:12px;object-fit:contain;box-shadow:var(--shadow-lg)}
-.lightbox-close{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.15);border:none;color:white;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-.lightbox-close:hover{background:rgba(255,255,255,.3)}
-/* Female dish animation */
-@keyframes dishSlideIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.dish-card-female{animation:dishSlideIn .35s cubic-bezier(.4,0,.2,1) both}
-@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.own-tag{animation:floatBadge 2.5s ease-in-out infinite}
 .mem-body{padding:10px}.mem-caption{font-size:12px;color:var(--dark-mid);line-height:1.4}
 
 /* Empty */
@@ -464,7 +433,7 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
         <select id="inp-gender"><option value="">اختر...</option><option value="male">ذكر</option><option value="female">أنثى</option></select>
         <div class="field-hint">⚠️ أتمنى يتم اختيار الجنس بالتحديد</div>
       </div>
-      <button class="btn-enter" id="btn-login" onclick="doLogin()">دخول</button>
+      <button class="btn-enter" onclick="doLogin()">دخول</button>
     </div>
   </div>
 </div>
@@ -514,13 +483,9 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
         </div>
         <!-- للأنثى -->
         <div id="home-female-view" style="display:none;">
-          <div class="hero-card" style="margin-bottom:15px;">
-            <div id="hero-txt-f" style="font-size:22px;font-weight:900;letter-spacing:-.03em;margin-bottom:3px;">أهلاً 👋</div>
-            <p>استمتعي بكل تفاصيل إستراحة العيد</p>
-          </div>
           <div class="stats-row" style="grid-template-columns:1fr 1fr;">
             <div class="stat-box"><div class="n" id="s-dishes-f">0</div><div class="l">طبق مسجّل</div></div>
-            <div class="stat-box"><div class="n" id="s-my-ratings">0</div><div class="l">تقييم على أطباقي</div></div>
+            <div class="stat-box"><div class="n" id="s-my-ratings">0</div><div class="l">تقييم على طبقي</div></div>
           </div>
           <div class="card"><div class="card-head">🏆 أفضل 3 أطباق</div><div id="home-top3-f"></div></div>
           <div class="card">
@@ -534,8 +499,8 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
         <div class="pg-title">🍽️ مسابقة أفضل طبق</div>
         <div class="pg-sub">للنساء: أضيفي طبقكِ — للرجال: قيّموا الأطباق</div>
         <div id="sec-female" style="display:none;margin-bottom:15px;">
-          <div class="info-bar">✨ أضيفي أطباقك للمسابقة — يمكنك إضافة أكثر من طبق</div>
-          <button class="btn btn-olive" id="btn-add-dish" onclick="openModal('m-dish')">+ إضافة طبق</button>
+          <div class="info-bar">✨ يمكنكِ إضافة طبق واحد فقط للمسابقة</div>
+          <button class="btn btn-olive" id="btn-add-dish" onclick="openModal('m-dish')">+ إضافة طبقي</button>
         </div>
         <div id="sec-male" style="display:none;margin-bottom:15px;">
           <div class="info-bar">⭐ قيّم الأطباق — لا يمكنك التقييم إذا لديك طبق مسجّل</div>
@@ -568,7 +533,7 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 
     </div>
   </div>
-  <nav class="bottom-nav" id="bottom-nav">
+  <nav class="bottom-nav">
     <div class="bn-group">
       <button class="bn-item bn-football" data-tab="football" onclick="goTab('football',this)"><span class="ic">⚽</span>القدم</button>
       <button class="bn-item bn-volleyball" data-tab="volleyball" onclick="goTab('volleyball',this)"><span class="ic">🏐</span>الطائرة</button>
@@ -805,8 +770,7 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 <div class="overlay" id="m-dish">
   <div class="modal">
     <button class="modal-x" onclick="closeModal('m-dish')">✕</button>
-    <div class="modal-title" id="d-modal-title">🍽️ إضافة طبق</div>
-    <input type="hidden" id="d-edit-id" value="">
+    <div class="modal-title">🍽️ إضافة طبقي</div>
     <div class="f-group"><label>اسم الطبق</label><input id="d-name" type="text" placeholder="مثال: كبسة دجاج"></div>
     <div class="f-group"><label>وصف مختصر (اختياري)</label><textarea id="d-desc" placeholder="اكتبي وصفاً موجزاً..."></textarea></div>
     <div class="f-group">
@@ -871,8 +835,8 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
     <div class="modal-title">📸 إضافة ذكرى</div>
     <div class="media-tabs">
       <button class="media-tab active" id="mtab-img" onclick="switchMediaTab('img')">🖼️ صورة</button>
-      <button class="media-tab" id="mtab-vid" onclick="switchMediaTab('vid')">🎬 فيديو</button>
-      <button class="media-tab" id="mtab-link" onclick="switchMediaTab('link')">▶️ يوتيوب</button>
+      <button class="media-tab" id="mtab-vid" onclick="switchMediaTab('vid')">🎬 فيديو (ملف)</button>
+      <button class="media-tab" id="mtab-link" onclick="switchMediaTab('link')">🔗 رابط يوتيوب</button>
     </div>
     <div class="f-row">
       <div class="f-group">
@@ -884,6 +848,7 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
       </div>
       <div class="f-group"><label>التعليق</label><input id="m-cap" type="text" placeholder="وصف قصير..."></div>
     </div>
+
     <!-- image -->
     <div id="media-img" class="f-group">
       <label>الصورة</label>
@@ -895,49 +860,31 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
         <div id="m-ch" style="display:none;" class="cam-btns"><button class="cam-btn" type="button" onclick="q('m-gal').click()">🖼️ تغيير</button></div>
       </div>
     </div>
-    <!-- video upload via Cloudinary -->
+
+    <!-- video file -->
     <div id="media-vid" class="f-group" style="display:none;">
-      <label>رفع فيديو</label>
-      <input class="cam-input" id="m-vid-file" type="file" accept="video/*" onchange="handleCloudinaryVid()">
-      <div class="img-area" id="vid-area">
-        <div id="m-vid-ph">
-          <div style="font-size:26px;">🎬</div>
-          <p style="font-size:12px;color:var(--gray);margin-top:5px;">اختر فيديو (MP4, MOV)</p>
-          <div class="cam-btns"><button class="cam-btn" type="button" onclick="q('m-vid-file').click()">🎬 اختر فيديو</button></div>
-        </div>
-        <div id="vid-uploading" style="display:none;text-align:center;padding:18px 0;">
-          <div style="font-size:28px;margin-bottom:8px;">⏳</div>
-          <div style="font-size:13px;font-weight:700;color:var(--olive);" id="vid-upload-pct">جاري الرفع... 0%</div>
-          <div style="background:var(--border);border-radius:6px;height:8px;margin-top:10px;overflow:hidden;">
-            <div id="vid-upload-bar" style="background:var(--olive);height:100%;width:0%;transition:width .3s;"></div>
-          </div>
-        </div>
-        <div id="vid-done" style="display:none;text-align:center;padding:10px 0;">
-          <video id="m-vid-prev" style="width:100%;max-height:140px;border-radius:8px;" controls></video>
-          <div style="font-size:11px;color:var(--success);margin-top:6px;font-weight:700;">✅ تم الرفع بنجاح</div>
-        </div>
+      <label>ملف الفيديو</label>
+      <input class="cam-input" id="m-vid-file" type="file" accept="video/*" onchange="handleVidFile()">
+      <div class="img-area">
+        <div id="m-vid-ph"><div style="font-size:26px;">🎬</div><p style="font-size:12px;color:var(--gray);margin-top:5px;">اختر فيديو من جهازك</p>
+          <div class="cam-btns"><button class="cam-btn" type="button" onclick="q('m-vid-file').click()">🎬 رفع فيديو</button></div></div>
+        <video id="m-vid-prev" style="display:none;width:100%;max-height:130px;border-radius:8px;margin-top:8px;" controls></video>
+        <div id="m-vid-ch" style="display:none;" class="cam-btns"><button class="cam-btn" type="button" onclick="q('m-vid-file').click()">🎬 تغيير</button></div>
       </div>
     </div>
+
     <!-- YouTube link -->
     <div id="media-link" class="f-group" style="display:none;">
-      <label>رابط يوتيوب</label>
+      <label>رابط يوتيوب أو واتساب</label>
       <input id="m-vid-url" type="url" placeholder="https://youtube.com/watch?v=..." dir="ltr">
-      <div id="yt-preview" style="margin-top:8px;display:none;border-radius:10px;overflow:hidden;aspect-ratio:16/9;">
-        <iframe id="yt-iframe" style="width:100%;height:100%;border:none;" allowfullscreen></iframe>
-      </div>
-      <div style="font-size:11px;color:var(--gray);margin-top:5px;">💡 الصق رابط يوتيوب وسيظهر المعاينة تلقائياً</div>
+      <div style="font-size:11px;color:var(--gray);margin-top:4px;">أدخل رابط يوتيوب أو رابط فيديو مشارك</div>
     </div>
+
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('m-mem')">إلغاء</button>
       <button class="btn btn-olive" onclick="saveMem()">حفظ ✅</button>
     </div>
   </div>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightbox-img" src="" alt="">
 </div>
 
 <script>
@@ -961,84 +908,20 @@ const DEMOS=[
   {name:'بيان الجهني',   phone:'0511000016',gender:'female'},
 ];
 
-/* ═══ SUPABASE CONFIG ═══ */
-const SB_URL='https://preastsocxwzsetqwbbc.supabase.co';
-const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByZWFzdHNvY3h3enNldHF3YmJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMjI2NjQsImV4cCI6MjA4ODg5ODY2NH0.ZJPM6K-JK0p0f382Gv65LfuwGuEcpIu6MNFCxPrLIME';
-const sbH={'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation','x-client-info':'bafrj/1.0'};
-async function sbGet(table,params=''){
-  const r=await fetch(`${SB_URL}/rest/v1/${table}?${params}`,{headers:sbH});
-  if(!r.ok)throw new Error(await r.text());
-  return r.json();
-}
-async function sbPost(table,body){
-  const r=await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:sbH,body:JSON.stringify(body)});
-  if(!r.ok)throw new Error(await r.text());
-  return r.json();
-}
-async function sbPatch(table,filter,body){
-  const r=await fetch(`${SB_URL}/rest/v1/${table}?${filter}`,{method:'PATCH',headers:{...sbH,'Prefer':'return=minimal'},body:JSON.stringify(body)});
-  if(!r.ok)throw new Error(await r.text());
-}
-async function sbDelete(table,filter){
-  const r=await fetch(`${SB_URL}/rest/v1/${table}?${filter}`,{method:'DELETE',headers:sbH});
-  if(!r.ok)throw new Error(await r.text());
-}
-/* app_state helpers — لتخزين الفرق والبراكيت كـ JSON */
-async function sbState(key){
-  try{const r=await sbGet('app_state',`key=eq.${key}&select=value`);return r[0]?.value??null}catch{return null}
-}
-async function sbSetState(key,value){
-  const r=await fetch(`${SB_URL}/rest/v1/app_state`,{method:'POST',
-    headers:{...sbH,'Prefer':'resolution=merge-duplicates,return=minimal'},
-    body:JSON.stringify({key,value,updated_at:new Date().toISOString()})});
-  if(!r.ok)console.error('sbSetState error',await r.text());
-}
-
 /* ═══ DATA ═══ */
-/* localStorage fallback فقط للـ session/settings */
 const K=k=>'bfj_'+k;
 const ld=k=>{try{return JSON.parse(localStorage.getItem(K(k)))??null}catch{return null}};
 const sv=(k,v)=>localStorage.setItem(K(k),JSON.stringify(v));
-
-/* cache محلي للبيانات — يُحدَّث عند كل fetch */
-let _cache={users:[],dishes:[],mems:[],players:[],vbPlayers:[],genteams:null,bracket:null,vbGenteams:null,vbBracket:null};
-const users=()=>_cache.users;
-const dishes=()=>_cache.dishes;
-const mems=()=>_cache.mems;
-const players=()=>_cache.players;
-const genTeams=()=>_cache.genteams;
-const bracket=()=>_cache.bracket;
-const vbPlayers=()=>_cache.vbPlayers;
-const vbGenTeams=()=>_cache.vbGenteams;
-const vbBracket=()=>_cache.vbBracket;
-
-/* جلب كل البيانات دفعة واحدة مع timeout */
-function withTimeout(promise,ms=8000){
-  return Promise.race([promise,new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))]);
-}
-async function fetchAll(){
-  try{
-    const [u,d,m,p,vp,gt,br,vgt,vbr]=await withTimeout(Promise.all([
-      sbGet('users','select=*&order=id'),
-      sbGet('dishes','select=*&order=id'),
-      sbGet('memories','select=*&order=id'),
-      sbGet('players','select=*&order=id'),
-      sbGet('vb_players','select=*&order=id'),
-      sbState('genteams'),sbState('bracket'),
-      sbState('vb_genteams'),sbState('vb_bracket'),
-    ]));
-    _cache.users=u.map(x=>({...x,id:x.id}));
-    _cache.dishes=d.map(x=>({...x,id:x.id,desc:x.description,ratings:x.ratings||{}}));
-    _cache.mems=m.map(x=>({...x,id:x.id,videoUrl:x.video_url}));
-    _cache.players=p;_cache.vbPlayers=vp;
-    _cache.genteams=gt;_cache.bracket=br;
-    _cache.vbGenteams=vgt;_cache.vbBracket=vbr;
-  }catch(e){
-    console.error('fetchAll error',e);
-    if(e.message==='timeout'){toast('⚠️ الاتصال بطيء — تحقق من الإنترنت');}
-    else{toast('⚠️ تعذّر الاتصال: '+e.message);}
-  }
-}
+const users=()=>ld('users')??[];
+const dishes=()=>ld('dishes')??[];
+const mems=()=>ld('mems')??[];
+const players=()=>ld('players')??[];
+const genTeams=()=>ld('genteams')??null;
+const bracket=()=>ld('bracket')??null;
+/* كرة الطائرة */
+const vbPlayers=()=>ld('vb_players')??[];
+const vbGenTeams=()=>ld('vb_genteams')??null;
+const vbBracket=()=>ld('vb_bracket')??null;
 
 /* ═══ SESSION ═══ */
 let ME=null;
@@ -1047,44 +930,16 @@ function sv2(k,v){sessionStorage.setItem(k,JSON.stringify(v))}
 function saveSession(){sv2('bfj_s',ME)}
 function loadSession(){try{const s=sessionStorage.getItem('bfj_s');if(s)ME=JSON.parse(s)}catch{}}
 
-async function doLogin(){
+function doLogin(){
   const name=q('inp-name').value.trim(),phone=q('inp-phone').value.trim(),gender=q('inp-gender').value,err=q('err-login');
   if(!name||!phone||!gender){err.style.display='block';err.textContent='⚠️ يرجى ملء جميع الحقول';return}
   if(!phone.startsWith('05')){err.style.display='block';err.textContent='⚠️ رقم الجوال يجب أن يبدأ بـ 05';return}
   if(phone.length!==10){err.style.display='block';err.textContent='⚠️ رقم الجوال يجب أن يكون 10 أرقام';return}
   err.style.display='none';
-  // loading state
-  const btn=q('btn-login');
-  const origTxt=btn?btn.textContent:'';
-  if(btn){btn.disabled=true;btn.textContent='جاري الدخول...';}
-  if(name==='احمد'&&phone==='0534967452'){
-    ME={name,phone,gender,role:'admin'};saveSession();
-    await fetchAll();showScreen('admin');renderAdmin();
-    if(btn){btn.disabled=false;btn.textContent=origTxt;}
-    return;
-  }
-  try{
-    const existing=await withTimeout(sbGet('users',`phone=eq.${phone}&select=*`),10000);
-    let u;
-    if(existing.length){
-      u=existing[0];
-      if(u.name!==name||u.gender!==gender){
-        await sbPatch('users',`phone=eq.${phone}`,{name,gender});
-        u.name=name;u.gender=gender;
-      }
-    }else{
-      const res=await sbPost('users',[{name,phone,gender,role:'user'}]);
-      u=Array.isArray(res)?res[0]:res;
-    }
-    ME={...u,role:u.role||'user'};saveSession();
-    await fetchAll();showScreen('user');initUser();
-  }catch(e){
-    console.error('login error',e);
-    const msg=e.message==='timeout'?'❌ انتهت مهلة الاتصال — تحقق من الإنترنت':'❌ خطأ في الاتصال: '+e.message;
-    err.style.display='block';err.textContent=msg;
-  }finally{
-    if(btn){btn.disabled=false;btn.textContent=origTxt;}
-  }
+  if(name==='احمد'&&phone==='0534967452'){ME={name,phone,gender,role:'admin'};saveSession();showScreen('admin');renderAdmin();return}
+  let list=users(),u=list.find(x=>x.phone===phone);
+  if(u){u.name=name;u.gender=gender}else{u={id:Date.now(),name,phone,gender,role:'user'};list.push(u)}
+  sv('users',list);ME=u;saveSession();showScreen('user');initUser();
 }
 function doLogout(){
   ME=null;sessionStorage.removeItem('bfj_s');
@@ -1160,12 +1015,12 @@ function showLoginForm(){
 
 function hideSplash(){showLoginForm()} // legacy alias
 
-async function initSplash(){
+function initSplash(){
   applyLoginBg();
+  // if already logged in, skip straight to app
   loadSession();
   if(ME){
     showScreen(ME.role==='admin'?'admin':'user');
-    await fetchAll();
     if(ME.role==='admin')renderAdmin();else initUser();
   }
 }
@@ -1212,14 +1067,11 @@ function renderSettingsPanel(){
 function initUser(){
   const f=ME.gender==='female';
   q('hero-txt').textContent=`أهلاً ${ME.name} 👋`;
-  if(q('hero-txt-f'))q('hero-txt-f').textContent=`أهلاً ${ME.name} 👋`;
-  // female nav
-  const nav=q('bottom-nav');
-  if(f){nav.classList.add('female-nav');}else{nav.classList.remove('female-nav');}
   document.querySelectorAll('.sb-football,.bn-football,.sb-volleyball,.bn-volleyball').forEach(el=>el.style.display=f?'none':'');
   document.querySelectorAll('.sb-memories,.bn-memories').forEach(el=>el.style.display=f?'none':'');
   q('home-male-view').style.display=f?'none':'block';
   q('home-female-view').style.display=f?'block':'none';
+  if(f){ /* female greeting via hero-txt only */ }
   renderStats();renderHomeTop3();renderDishes();renderFootballUser();if(!f)renderVolleyballUser();renderMemUser();
 }
 
@@ -1273,8 +1125,8 @@ function renderHomeTeamCard(){
   card.style.display='block';
   // ترتيب الفريق في الدوري
   let rankTxt='—',rankBadge='';
-  const lg=_cache.league;
-  const isLeague=_cache.league;
+  const lg=ld('league');
+  const isLeague=ld('leaguemode');
   if(isLeague&&lg&&lg.table){
     // إعادة حساب الترتيب
     const sorted=[...lg.table].sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf);
@@ -1321,7 +1173,7 @@ function renderHomeVbTeamCard(){
   if(!myTeam){card.style.display='none';return;}
   card.style.display='block';
   let rankTxt='—',rankBadge='';
-  const lg=_cache.vb_league,isLeague=_cache.vb_league;
+  const lg=ld('vb_league'),isLeague=ld('vb_leaguemode');
   if(isLeague&&lg&&lg.table){
     const sorted=[...lg.table].sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf);
     const idx=sorted.findIndex(r=>r.name===myTeam.name);
@@ -1367,33 +1219,25 @@ function renderHomeTop3(){
 }
 
 /* ═══ DISHES ═══ */
-const CHEF_TITLES=['طاهية احترافية','ملكة الطهاة','شيف رسمي'];
-function chefTitle(phone){
-  let t=ld('chefTitles')??{};
-  if(!t[phone]){t[phone]=CHEF_TITLES[Math.floor(Math.random()*3)];sv('chefTitles',t)}
-  return t[phone];
-}
 function avgOf(d){const v=Object.values(d.ratings);return v.length?v.reduce((a,b)=>a+b,0)/v.length:0}
 function renderDishes(){
   const isFemale=ME.gender==='female',isMale=ME.gender==='male';
   q('sec-female').style.display=isFemale?'block':'none';q('sec-male').style.display=isMale?'block':'none';
   const all=dishes(),myDish=all.find(d=>d.ownerPhone===ME.phone);
-  if(isFemale){const btn=q('btn-add-dish');if(btn){btn.textContent='+ إضافة طبق';btn.disabled=false;}}
+  if(isFemale){const btn=q('btn-add-dish');if(myDish){btn.textContent='✅ طبقكِ مسجّل';btn.disabled=true}else{btn.textContent='+ إضافة طبقي';btn.disabled=false}}
   const canRate=isMale&&!myDish;
   renderTop3(all);
   const grid=q('dishes-grid');
   if(!all.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1"><span class="ei">🍽️</span><p>لا توجد أطباق بعد</p></div>';return}
-  grid.innerHTML=all.map((dish,idx)=>{
+  grid.innerHTML=all.map(dish=>{
     const avg=avgOf(dish),myR=dish.ratings[ME.phone]||0,isOwner=dish.ownerPhone===ME.phone;
-    const displayName=isMale?chefTitle(dish.ownerPhone):dish.ownerName;
-    const animStyle=isFemale?`style="animation-delay:${idx*0.06}s"`:''
-    return`<div class="dish-card${isFemale?' dish-card-female':''}" ${animStyle}>
+    return`<div class="dish-card">
       <div class="dish-thumb">${dish.img?`<img src="${dish.img}" alt="">`:'🍲'}</div>
       <div class="dish-body">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:5px;">
           <div class="dish-name">${dish.name}</div>${isOwner?'<span class="own-tag">طبقكِ</span>':''}
         </div>
-        <div class="dish-by">👩‍🍳 ${displayName}</div>
+        <div class="dish-by">👩‍🍳 ${dish.ownerName}</div>
         ${dish.desc?`<div class="dish-desc">${dish.desc}</div>`:''}
         <div class="rating-row">
           <span class="rating-num">${avg>0?avg.toFixed(1):'—'}</span>
@@ -1402,23 +1246,16 @@ function renderDishes(){
         </div>
         ${canRate?`<div style="margin-top:9px;"><div style="font-size:11px;color:var(--gray);margin-bottom:3px;">قيّم الطبق:</div>
           <div class="stars-row" id="sr-${dish.id}">${[1,2,3,4,5].map(s=>`<span class="star ${s<=myR?'on':''}" onclick="doRate('${dish.id}',${s})" onmouseover="hov('${dish.id}',${s})" onmouseout="unhov('${dish.id}',${myR})">★</span>`).join('')}</div></div>`
-          :isMale?`<div style="font-size:11px;color:var(--gray-light);margin-top:7px;">لا يمكنك التقييم — لديك طبق مسجّل</div>`
-          :isOwner?`<div style="display:flex;gap:7px;margin-top:10px;">
-            <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;flex:1;" onclick="openEditDish('${dish.id}')">✏️ تعديل</button>
-            <button class="btn btn-red" style="font-size:12px;padding:6px 12px;" onclick="delDish('${dish.id}')">🗑️</button>
-          </div>`:''}
+          :isMale?`<div style="font-size:11px;color:var(--gray-light);margin-top:7px;">لا يمكنك التقييم — لديك طبق مسجّل</div>`:''}
       </div></div>`;
   }).join('');
 }
 function hov(id,n){document.querySelectorAll(`#sr-${id} .star`).forEach((s,i)=>s.style.color=i<n?'#C9922A':'#ddd')}
 function unhov(id,cur){document.querySelectorAll(`#sr-${id} .star`).forEach((s,i)=>s.style.color=i<cur?'#C9922A':'#ddd')}
-async function doRate(dishId,stars){
-  const d=dishes().find(x=>x.id==dishId);if(!d)return;
-  if(d.owner_phone===ME.phone||d.ownerPhone===ME.phone){toast('لا يمكنك تقييم طبقك الخاص');return}
-  d.ratings[ME.phone]=stars;
-  try{await sbPatch('dishes',`id=eq.${dishId}`,{ratings:d.ratings});}
-  catch(e){toast('⚠️ خطأ في حفظ التقييم');return;}
-  renderDishes();renderStats();renderHomeTop3();toast(`⭐ تم التقييم بـ ${stars} نجوم`);
+function doRate(dishId,stars){
+  let all=dishes();const d=all.find(x=>x.id==dishId);if(!d)return;
+  if(d.ownerPhone===ME.phone){toast('لا يمكنك تقييم طبقك الخاص');return}
+  d.ratings[ME.phone]=stars;sv('dishes',all);renderDishes();renderStats();renderHomeTop3();toast(`⭐ تم التقييم بـ ${stars} نجوم`);
 }
 function renderTop3(all){
   const sorted=[...all].sort((a,b)=>avgOf(b)-avgOf(a)).slice(0,3);
@@ -1429,71 +1266,16 @@ function renderTop3(all){
 /* Image handler */
 function handleImg(fileId,prevId,phId,chId){
   const file=q(fileId).files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    const original=new Image();
-    original.onload=()=>{
-      // ضغط الصورة عبر canvas
-      const canvas=document.createElement('canvas');
-      const MAX=1200; // أقصى عرض/ارتفاع
-      let w=original.width,h=original.height;
-      if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX}else{w=Math.round(w*MAX/h);h=MAX}}
-      canvas.width=w;canvas.height=h;
-      canvas.getContext('2d').drawImage(original,0,0,w,h);
-      const compressed=canvas.toDataURL('image/jpeg',0.75); // جودة 75%
-      const img=q(prevId);
-      img.src=compressed;
-      img.style.display='block';
-      q(phId).style.display='none';
-      q(chId).style.display='flex';
-    };
-    original.src=ev.target.result;
-  };
-  reader.readAsDataURL(file);
+  const r=new FileReader();r.onload=ev=>{const img=q(prevId);img.src=ev.target.result;img.style.display='block';q(phId).style.display='none';q(chId).style.display='flex'};r.readAsDataURL(file);
 }
-async function saveDish(){
-  const name=q('d-name').value.trim(),desc=q('d-desc').value.trim();
+function saveDish(){
+  const name=q('d-name').value.trim(),desc=q('d-desc').value.trim(),img=q('d-prev').src;
   if(!name){toast('⚠️ أدخلي اسم الطبق');return}
-  const editId=q('d-edit-id').value;
-  const src=q('d-prev').src||'';
-  const imgData=src.startsWith('data:')?src:'';
-  try{
-    if(editId){
-      const upd={name,description:desc};if(imgData)upd.img=imgData;
-      await sbPatch('dishes',`id=eq.${editId}`,upd);
-      const d=_cache.dishes.find(x=>x.id==editId);
-      if(d){d.name=name;d.desc=desc;if(imgData)d.img=imgData;}
-    }else{
-      const res=await sbPost('dishes',[{name,description:desc,img:imgData,owner_phone:ME.phone,owner_name:ME.name,ratings:{}}]);
-      const nd=res[0];
-      _cache.dishes.push({...nd,id:nd.id,desc:nd.description,ratings:nd.ratings||{}});
-    }
-  }catch(e){toast('⚠️ خطأ في الحفظ — '+e.message);return;}
-  closeModal('m-dish');
-  q('d-name').value='';q('d-desc').value='';q('d-edit-id').value='';
-  q('d-prev').src='';q('d-prev').style.display='none';
-  q('d-ph').style.display='block';q('d-ch').style.display='none';
-  q('d-modal-title').textContent='🍽️ إضافة طبق';
-  renderDishes();renderStats();renderHomeTop3();
-  toast(editId?'✅ تم تعديل الطبق!':'✅ تم نشر طبقكِ!');
-}
-function openEditDish(id){
-  const d=dishes().find(x=>x.id==id);if(!d)return;
-  q('d-edit-id').value=id;
-  q('d-modal-title').textContent='✏️ تعديل الطبق';
-  q('d-name').value=d.name;
-  q('d-desc').value=d.desc||'';
-  if(d.img){q('d-prev').src=d.img;q('d-prev').style.display='block';q('d-ph').style.display='none';q('d-ch').style.display='flex';}
-  else{q('d-prev').src='';q('d-prev').style.display='none';q('d-ph').style.display='block';q('d-ch').style.display='none';}
-  openModal('m-dish');
-}
-async function delDish(id){
-  if(!confirm('هل تريدين حذف هذا الطبق؟'))return;
-  try{await sbDelete('dishes',`id=eq.${id}`);_cache.dishes=_cache.dishes.filter(d=>d.id!=id);}
-  catch(e){toast('⚠️ خطأ في الحذف');return;}
-  renderDishes();renderStats();renderHomeTop3();
-  if(ME?.role==='admin')renderAdmin();
-  toast('🗑️ تم حذف الطبق');
+  const all=dishes();if(all.find(d=>d.ownerPhone===ME.phone)){toast('لديكِ طبق مسجّل');return}
+  all.push({id:Date.now(),name,desc,img:img&&img.startsWith('data:')?img:'',ownerPhone:ME.phone,ownerName:ME.name,ratings:{}});
+  sv('dishes',all);closeModal('m-dish');
+  q('d-name').value='';q('d-desc').value='';q('d-prev').src='';q('d-prev').style.display='none';q('d-ph').style.display='block';q('d-ch').style.display='none';
+  renderDishes();renderStats();renderHomeTop3();toast('✅ تم نشر طبقكِ!');
 }
 
 /* ═══ FOOTBALL USER ═══ */
@@ -1510,7 +1292,7 @@ const LVL_NAMES={1:'الأقوى',2:'قوي',3:'متوسط',4:'ضعيف',5:'ال
 const LVL_COLORS={1:'#27AE60',2:'#2980B9',3:'#F39C12',4:'#E67E22',5:'#E74C3C'};
 
 function renderFootballUser(){
-  const plist=players(),me=plist.find(p=>p.phone===ME.phone),teams=genTeams(),br=bracket(),lg=_cache.league;
+  const plist=players(),me=plist.find(p=>p.phone===ME.phone),teams=genTeams(),br=bracket(),lg=ld('league');
   let html=`<div class="card"><div class="card-head">📋 تسجيلي في البطولة</div>`;
   if(!me){
     html+=`<div class="info-bar">سجّل اسمك للمشاركة في البطولة</div><button class="btn btn-olive" onclick="openRegModal()">⚽ تسجيل المشاركة</button>`;
@@ -1549,7 +1331,7 @@ function renderFootballUser(){
   }
 
   // الجدول — يظهر دائماً إذا موجود (Bracket أو League)
-  const isLeague=_cache.league;
+  const isLeague=ld('leaguemode');
   if(isLeague&&lg){
     html+=`<div class="card"><div class="card-head">📋 جدول الدوري النقطي</div>${leagueHTML(lg,true)}</div>`;
   } else if(br){
@@ -1564,18 +1346,15 @@ function renderFootballUser(){
 }
 function avgTL(t){const r=t.players.filter(p=>p.level>0);return r.length?(r.reduce((a,p)=>a+p.level,0)/r.length).toFixed(1):'—'}
 function openRegModal(){q('reg-name').value=ME.name;q('reg-note').value='';openModal('m-register')}
-async function saveReg(){
-  const note=q('reg-note').value.trim();
-  if(players().find(p=>p.phone===ME.phone)){toast('أنت مسجّل بالفعل');closeModal('m-register');return}
-  try{
-    const res=await sbPost('players',[{name:ME.name,phone:ME.phone,level:0,note}]);
-    _cache.players.push(res[0]);
-  }catch(e){toast('⚠️ خطأ في التسجيل');return;}
-  closeModal('m-register');renderFootballUser();renderStats();toast('✅ تم التسجيل!');
+function saveReg(){
+  const note=q('reg-note').value.trim();let plist=players();
+  if(plist.find(p=>p.phone===ME.phone)){toast('أنت مسجّل بالفعل');closeModal('m-register');return}
+  plist.push({id:Date.now(),name:ME.name,phone:ME.phone,level:0,note});
+  sv('players',plist);closeModal('m-register');renderFootballUser();renderStats();toast('✅ تم التسجيل!');
 }
 
 /* ═══ VOLLEYBALL USER ═══ */
-const VB_TITLES=['ياقوي','ياخطير','يافنان'];
+const VB_TITLES=['سمّاع','ضارب','محترف'];
 function getVbTitle(pl){
   if(!pl.level)return null;
   let titles=ld('vbTitles')??{};
@@ -1585,7 +1364,7 @@ function getVbTitle(pl){
 const VB_TEAM_NAMES=['النسور','البراق','الرعد','الصواعق','الأبطال','الفرسان','النجوم','الأساطير'];
 
 function renderVolleyballUser(){
-  const plist=vbPlayers(),me=plist.find(p=>p.phone===ME.phone),teams=vbGenTeams(),br=vbBracket(),lg=_cache.vb_league;
+  const plist=vbPlayers(),me=plist.find(p=>p.phone===ME.phone),teams=vbGenTeams(),br=vbBracket(),lg=ld('vb_league');
   let html=`<div class="card"><div class="card-head">📋 تسجيلي في بطولة الطائرة</div>`;
   if(!me){
     html+=`<div class="info-bar">سجّل اسمك للمشاركة في بطولة كرة الطائرة</div>
@@ -1619,7 +1398,7 @@ function renderVolleyballUser(){
     </div>`).join('');
     html+=`</div></div>`;
   }
-  const isLeague=_cache.vb_league;
+  const isLeague=ld('vb_leaguemode');
   if(isLeague&&lg){
     html+=`<div class="card"><div class="card-head">📋 جدول الدوري النقطي</div>${vbLeagueHTML(lg,true)}</div>`;
   } else if(br){
@@ -1631,26 +1410,21 @@ function renderVolleyballUser(){
 }
 
 function openVbRegModal(){q('vb-reg-name').value=ME.name;q('vb-reg-note').value='';openModal('m-vb-register')}
-async function saveVbReg(){
-  const note=q('vb-reg-note').value.trim();
-  if(vbPlayers().find(p=>p.phone===ME.phone)){toast('أنت مسجّل بالفعل');closeModal('m-vb-register');return}
-  try{
-    const res=await sbPost('vb_players',[{name:ME.name,phone:ME.phone,level:0,note}]);
-    _cache.vbPlayers.push(res[0]);
-  }catch(e){toast('⚠️ خطأ في التسجيل');return;}
-  closeModal('m-vb-register');renderVolleyballUser();toast('✅ تم التسجيل!');
+function saveVbReg(){
+  const note=q('vb-reg-note').value.trim();let plist=vbPlayers();
+  if(plist.find(p=>p.phone===ME.phone)){toast('أنت مسجّل بالفعل');closeModal('m-vb-register');return}
+  plist.push({id:Date.now(),name:ME.name,phone:ME.phone,level:0,note});
+  sv('vb_players',plist);closeModal('m-vb-register');renderVolleyballUser();toast('✅ تم التسجيل!');
 }
 
 /* ═══ VOLLEYBALL ADMIN ═══ */
-async function addVbPlayerManual(){
+function addVbPlayerManual(){
   const name=q('new-vb-name').value.trim(),lvl=parseInt(q('new-vb-lvl').value);
   if(!name){toast('⚠️ أدخل اسم اللاعب');return}
-  if(vbPlayers().find(p=>p.name===name)){toast('⚠️ هذا اللاعب موجود');return}
-  try{
-    const res=await sbPost('vb_players',[{name,phone:'adm-vb-'+Date.now(),level:lvl,note:'أضافه الأدمن',manual:true}]);
-    _cache.vbPlayers.push(res[0]);
-  }catch(e){toast('⚠️ خطأ في الإضافة');return;}
-  q('new-vb-name').value='';q('new-vb-lvl').value='0';
+  const plist=vbPlayers();
+  if(plist.find(p=>p.name===name)){toast('⚠️ هذا اللاعب موجود');return}
+  plist.push({id:Date.now(),name,phone:'adm-vb-'+Date.now(),level:lvl,note:'أضافه الأدمن',manual:true});
+  sv('vb_players',plist);q('new-vb-name').value='';q('new-vb-lvl').value='0';
   renderAdmVbPlayers();toast(`✅ تم إضافة ${name}`);
 }
 function renderAdmVbPlayers(){
@@ -1670,10 +1444,10 @@ function renderAdmVbPlayers(){
     <button class="btn btn-red" onclick="delVbPlayer(${pl.id})">حذف</button>
   </div>`).join('');
 }
-async function setVbLvl(id,lvl){const pl=vbPlayers().find(x=>x.id==id);if(!pl)return;pl.level=parseInt(lvl);try{await sbPatch('vb_players',`id=eq.${id}`,{level:pl.level});}catch(e){toast('⚠️ خطأ');return;}renderAdmVbPlayers();toast('✅ تم تحديد المستوى')}
-async function delVbPlayer(id){if(!confirm('حذف؟'))return;try{await sbDelete('vb_players',`id=eq.${id}`);_cache.vbPlayers=_cache.vbPlayers.filter(p=>p.id!==id);}catch(e){toast('⚠️ خطأ');return;}renderAdmVbPlayers();toast('✅ تم الحذف')}
+function setVbLvl(id,lvl){let p=vbPlayers();const pl=p.find(x=>x.id==id);if(!pl)return;pl.level=parseInt(lvl);sv('vb_players',p);renderAdmVbPlayers();toast('✅ تم تحديد المستوى')}
+function delVbPlayer(id){if(!confirm('حذف؟'))return;sv('vb_players',vbPlayers().filter(p=>p.id!==id));renderAdmVbPlayers();toast('✅ تم الحذف')}
 
-async function genVbTeams(){
+function genVbTeams(){
   const p=vbPlayers(),numTeams=parseInt(q('num-vb-teams-sel').value);
   if(p.length<numTeams){toast(`⚠️ عدد اللاعبين (${p.length}) أقل من عدد الفرق (${numTeams})`);return}
   const existingTeams=vbGenTeams();
@@ -1685,16 +1459,13 @@ async function genVbTeams(){
     const row=Math.floor(i/numTeams),idx=row%2===0?i%numTeams:numTeams-1-(i%numTeams);
     teams[idx].players.push(pl);
   });
-  _cache.vbGenteams=teams;_cache.vbBracket=null;
-  await Promise.all([sbSetState('vb_genteams',teams),sbSetState('vb_bracket',null),sbSetState('vb_league',null)]);
+  sv('vb_genteams',teams);sv('vb_bracket',null);sv('vb_league',null);sv('vb_leaguemode',false);
   renderAdmVbArea(teams);
   toast('✅ تم توزيع فرق الطائرة!');
 }
-async function clearVbAll(){
+function clearVbAll(){
   if(!confirm('مسح كل بيانات الطائرة؟'))return;
-  try{await sbDelete('vb_players','id=gte.0');_cache.vbPlayers=[];}catch(e){}
-  _cache.vbGenteams=null;_cache.vbBracket=null;
-  await Promise.all([sbSetState('vb_genteams',null),sbSetState('vb_bracket',null),sbSetState('vb_league',null)]);
+  ['vb_players','vb_genteams','vb_bracket','vb_league','vb_leaguemode','vbTitles'].forEach(k=>localStorage.removeItem(K(k)));
   renderAdmVbPlayers();renderAdmVbArea(null);
   toast('🗑️ تم المسح');
 }
@@ -1718,7 +1489,7 @@ function renderAdmVbArea(teams){
     </div>`).join('')}
   </div>`;
   // bracket/league controls
-  const br=vbBracket(),lg=_cache.vb_league,isLg=_cache.vb_league;
+  const br=vbBracket(),lg=ld('vb_league'),isLg=ld('vb_leaguemode');
   q('adm-vb-bracket').innerHTML=`<div class="card">
     <div class="card-head">📅 الجدول</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
@@ -1728,140 +1499,110 @@ function renderAdmVbArea(teams){
     ${isLg&&lg?`<div>${vbLeagueHTML(lg,false)}</div>`:br?`<div>${bracketHTML(br,true)}</div>`:'<div style="color:var(--gray);font-size:13px;">لم يُنشأ الجدول بعد</div>'}
   </div>`;
 }
-async function editVbTeamName(i){
+function editVbTeamName(i){
   const cur=vbGenTeams();if(!cur)return;
-  const oldName=cur[i].name;
-  const n=prompt('اسم الفريق:',oldName);if(!n||!n.trim()||n.trim()===oldName)return;
-  const newName=n.trim();
-  cur[i].name=newName;
-  const lg=_cache.vb_league;
-  if(lg){lg.matches.forEach(m=>{if(m.a===oldName)m.a=newName;if(m.b===oldName)m.b=newName});if(lg.table)lg.table.forEach(r=>{if(r.name===oldName)r.name=newName});}
-  const br=vbBracket();
-  if(br){br.forEach(round=>round.forEach(m=>{m.teams=m.teams.map(t=>t===oldName?newName:t)}));_cache.vbBracket=br;}
-  _cache.vbGenteams=cur;
-  await Promise.all([sbSetState('vb_genteams',cur),br?sbSetState('vb_bracket',br):Promise.resolve(),lg?sbSetState('vb_league',lg):Promise.resolve()]);
-  renderAdmVbArea(cur);toast('✅ تم تغيير الاسم وتحديث الجدول');
+  const n=prompt('اسم الفريق:',cur[i].name);if(!n||!n.trim())return;
+  cur[i].name=n.trim();sv('vb_genteams',cur);renderAdmVbArea(cur);
 }
-async function genVbBracket(){
+function genVbBracket(){
   const teams=vbGenTeams();if(!teams)return;
+  sv('vb_leaguemode',false);localStorage.removeItem(K('vb_league'));
   const names=teams.map(t=>t.name);
   const padded=[...names];while(padded.length&(padded.length-1))padded.push('');
   function makeRound(ts){const r=[];for(let i=0;i<ts.length;i+=2)r.push({teams:[ts[i],ts[i+1]],winner:null});return r}
   const rounds=[makeRound(padded)];
-  _cache.vbBracket=rounds;
-  await Promise.all([sbSetState('vb_bracket',rounds),sbSetState('vb_league',null)]);
-  renderAdmVbArea(vbGenTeams());
+  sv('vb_bracket',rounds);renderAdmVbArea(vbGenTeams());
+  if(ME&&ME.role!=='admin')renderVolleyballUser();
   toast('✅ تم إنشاء الجدول');
 }
-async function setVbW(ri,mi,w){
+function setVbW(ri,mi,w){
   let rounds=vbBracket();if(!rounds)return;
   rounds[ri][mi].winner=w;
+  // advance winner
   if(ri+1<rounds.length){const nmi=Math.floor(mi/2);rounds[ri+1][nmi].teams[mi%2]=rounds[ri][mi].teams[w]}
   else if(!rounds[ri+1]){
     const winners=rounds[ri].map(m=>m.teams[m.winner??0]).filter(Boolean);
     if(winners.length>1){const r=[];for(let i=0;i<winners.length;i+=2)r.push({teams:[winners[i],winners[i+1]||''],winner:null});rounds.push(r)}
   }
-  _cache.vbBracket=rounds;
-  await sbSetState('vb_bracket',rounds);renderAdmVbArea(vbGenTeams());
+  sv('vb_bracket',rounds);renderAdmVbArea(vbGenTeams());
 }
-async function startVbLeagueWithCfg(){
+function openVbLeagueCfg(){
+  sv('vb_leaguemode',true);
   const teams=vbGenTeams();if(!teams||!teams.length){toast('⚠️ أنشئ الفرق أولاً');return}
-  const legs=parseInt(q('vbcfg-legs').value)||1;
-  const winPts=parseInt(q('vbcfg-winpts').value)||3;
-  const drawPts=parseInt(q('vbcfg-drawpts').value)||1;
+  const cfg={winPts:3,drawPts:1,extraTime:false,legs:1};
   const names=teams.map(t=>t.name);
   const matches=[];
-  for(let i=0;i<names.length;i++){
-    for(let j=i+1;j<names.length;j++){
-      matches.push({a:names[i],b:names[j],goalsA:null,goalsB:null,leg:1});
-      if(legs===2)matches.push({a:names[j],b:names[i],goalsA:null,goalsB:null,leg:2});
-    }
-  }
-  const table=names.map(n=>({name:n,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}));
-  const cfg={legs,winPts,drawPts};
-  const leagueData={matches,table,cfg};
-  _cache.vb_league=leagueData;
-  await Promise.all([sbSetState('vb_league',leagueData),sbSetState('vb_bracket',null)]);
-  closeModal('m-vb-league-cfg');
-  renderAdmVbArea(vbGenTeams());
-  toast(`✅ تم إنشاء الدوري — ${matches.length} مباراة`);
+  for(let i=0;i<names.length;i++)for(let j=i+1;j<names.length;j++)matches.push({a:names[i],b:names[j],goalsA:null,goalsB:null,leg:1});
+  sv('vb_league',{cfg,matches,table:[]});
+  renderAdmVbArea(vbGenTeams());toast('✅ تم إنشاء الدوري');
 }
-window.setVbLG=(mi,side,val)=>{
-  const lg=_cache.vb_league;if(!lg)return;
+function setVbLG(mi,side,val){
+  const lg=ld('vb_league');if(!lg)return;
   const v=val===''?null:parseInt(val);
-  if(v!==null&&(isNaN(v)||v<0))return;
-  lg.matches[mi][side==='a'?'goalsA':'goalsB']=v;
-  const cfg=lg.cfg||{winPts:3,drawPts:1};
-  const names=[...new Set(lg.matches.map(m=>[m.a,m.b]).flat())];
-  lg.table=names.map(n=>({name:n,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}));
-  lg.matches.forEach(m=>{
-    if(m.goalsA===null||m.goalsB===null)return;
-    const ra=lg.table.find(r=>r.name===m.a),rb=lg.table.find(r=>r.name===m.b);
-    if(!ra||!rb)return;
-    ra.p++;rb.p++;ra.gf+=m.goalsA;ra.ga+=m.goalsB;rb.gf+=m.goalsB;rb.ga+=m.goalsA;
-    if(m.goalsA>m.goalsB){ra.w++;ra.pts+=cfg.winPts;rb.l++}
-    else if(m.goalsB>m.goalsA){rb.w++;rb.pts+=cfg.winPts;ra.l++}
-    else{ra.d++;ra.pts+=cfg.drawPts;rb.d++;rb.pts+=cfg.drawPts}
-  });
-  sbSetState('vb_league',lg);
-  const medals=['🥇','🥈','🥉'];
-  const tblEl=document.getElementById('vblg-table-body');
-  if(tblEl){
-    const sorted=[...lg.table].sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf);
-    tblEl.innerHTML=sorted.map((r,i)=>`<tr style="${i===0?'background:var(--accent-pale);':i===1?'background:var(--accent-xpale);':i===2?'background:var(--surface-2);':''}">
-      <td>${medals[i]||i+1}</td><td><strong>${r.name}</strong></td>
-      <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td>
-      <td style="color:${r.gf-r.ga>0?'#27AE60':r.gf-r.ga<0?'#E74C3C':'var(--gray)'};">${r.gf-r.ga>0?'+':''}${r.gf-r.ga}</td>
-      <td><strong style="color:var(--olive);font-size:15px;">${r.pts}</strong></td></tr>`).join('');
+  if(side==='a')lg.matches[mi].goalsA=isNaN(v)?null:v;else lg.matches[mi].goalsB=isNaN(v)?null:v;
+  sv('vb_league',lg);
+  // partial DOM update
+  const m=lg.matches[mi];
+  const res=q(`vblg-res-${mi}`);
+  if(res&&m.goalsA!==null&&m.goalsB!==null){
+    res.style.color=m.goalsA>m.goalsB?'#4ADE80':m.goalsB>m.goalsA?'#F87171':'#FCD34D';
+    res.textContent=m.goalsA>m.goalsB?'✅ '+m.a.split(' ')[0]:m.goalsB>m.goalsA?'✅ '+m.b.split(' ')[0]:'تعادل';
   }
-  const resEl=document.getElementById(`vblg-res-${mi}`),mm=lg.matches[mi];
-  if(resEl&&mm.goalsA!==null&&mm.goalsB!==null){const col=mm.goalsA>mm.goalsB?'#27AE60':mm.goalsB>mm.goalsA?'#E74C3C':'#F39C12';resEl.style.color=col;resEl.textContent=mm.goalsA>mm.goalsB?mm.a.split(' ')[0]+' ✅':mm.goalsB>mm.goalsA?mm.b.split(' ')[0]+' ✅':'تعادل';}
-  else if(resEl){resEl.textContent='—';resEl.style.color='var(--gray-light)'}
-  const pb=document.getElementById('vblg-progress-bar'),pt=document.getElementById('vblg-progress-txt');
-  if(pb&&pt){const d=lg.matches.filter(x=>x.goalsA!==null&&x.goalsB!==null).length;const p=Math.round(d/lg.matches.length*100);pb.style.width=p+'%';pt.textContent=`تم إدخال ${d} من ${lg.matches.length} مباراة (${p}%)`;}
-};
-
+}
 function vbLeagueHTML(lg,readOnly=false){
-  const cfg=lg.cfg||{winPts:3,drawPts:1,legs:1};
-  const names=[...new Set(lg.matches.map(m=>[m.a,m.b]).flat())];
-  lg.table=names.map(n=>({name:n,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}));
-  lg.matches.forEach(m=>{
-    if(m.goalsA===null||m.goalsB===null)return;
-    const ra=lg.table.find(r=>r.name===m.a),rb=lg.table.find(r=>r.name===m.b);
-    if(!ra||!rb)return;
-    ra.p++;rb.p++;ra.gf+=m.goalsA;ra.ga+=m.goalsB;rb.gf+=m.goalsB;rb.ga+=m.goalsA;
-    if(m.goalsA>m.goalsB){ra.w++;ra.pts+=cfg.winPts;rb.l++}
-    else if(m.goalsB>m.goalsA){rb.w++;rb.pts+=cfg.winPts;ra.l++}
-    else{ra.d++;ra.pts+=cfg.drawPts;rb.d++;rb.pts+=cfg.drawPts}
-  });
+  const cfg=lg.cfg||{winPts:3,drawPts:1,extraTime:false,legs:1};
+  const recalc=()=>{
+    const names=[...new Set(lg.matches.map(m=>[m.a,m.b]).flat())];
+    lg.table=names.map(n=>({name:n,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}));
+    lg.matches.forEach(m=>{
+      if(m.goalsA===null||m.goalsB===null)return;
+      const ra=lg.table.find(r=>r.name===m.a),rb=lg.table.find(r=>r.name===m.b);
+      if(!ra||!rb)return;
+      ra.p++;rb.p++;ra.gf+=m.goalsA;ra.ga+=m.goalsB;rb.gf+=m.goalsB;rb.ga+=m.goalsA;
+      if(m.goalsA>m.goalsB){ra.w++;ra.pts+=cfg.winPts;rb.l++}
+      else if(m.goalsB>m.goalsA){rb.w++;rb.pts+=cfg.winPts;ra.l++}
+      else{ra.d++;ra.pts+=cfg.drawPts;rb.d++;rb.pts+=cfg.drawPts}
+    });
+  };
+  recalc();
   const sorted=[...lg.table].sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf);
   const medals=['🥇','🥈','🥉'];
-  const done=lg.matches.filter(m=>m.goalsA!==null&&m.goalsB!==null).length,total=lg.matches.length,pct=total?Math.round(done/total*100):0;
-  const progressBar=`<div style="background:var(--border);border-radius:6px;height:8px;margin-bottom:6px;overflow:hidden;"><div id="vblg-progress-bar" style="background:var(--olive);height:100%;width:${pct}%;transition:width .4s;"></div></div><div id="vblg-progress-txt" style="font-size:12px;color:var(--gray);margin-bottom:14px;">تم إدخال ${done} من ${total} مباراة (${pct}%)</div>`;
-  const tblHTML=`<div style="overflow-x:auto;margin-bottom:14px;"><table class="tbl"><thead><tr><th>#</th><th>الفريق</th><th>ل</th><th>ف</th><th>ت</th><th>خ</th><th>هج</th><th>عل</th><th>ف/ع</th><th>نقاط</th></tr></thead>
-    <tbody id="vblg-table-body">${sorted.map((r,i)=>`<tr style="${i===0?'background:var(--accent-pale);':i===1?'background:var(--accent-xpale);':i===2?'background:var(--surface-2);':''}">
-      <td>${medals[i]||i+1}</td><td><strong>${r.name}</strong></td><td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td>
-      <td style="color:${r.gf-r.ga>0?'#27AE60':r.gf-r.ga<0?'#E74C3C':'var(--gray)'};">${r.gf-r.ga>0?'+':''}${r.gf-r.ga}</td>
-      <td><strong style="color:var(--olive);font-size:15px;">${r.pts}</strong></td></tr>`).join('')}
+  const tbl=`<div style="overflow-x:auto;margin-bottom:14px;"><table class="tbl">
+    <thead><tr><th>#</th><th>الفريق</th><th>ل</th><th>ف</th><th>ت</th><th>خ</th><th>النقاط</th></tr></thead>
+    <tbody>${sorted.map((r,i)=>`<tr style="${i<3?'background:var(--accent-pale);':''}">
+      <td>${medals[i]||i+1}</td><td><strong>${r.name}</strong></td>
+      <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
+      <td><strong style="color:var(--olive);">${r.pts}</strong></td></tr>`).join('')}
     </tbody></table></div>`;
   const matchRows=lg.matches.map((m,mi)=>{
-    if(readOnly){const has=m.goalsA!==null&&m.goalsB!==null;
+    if(readOnly){
+      const has=m.goalsA!==null&&m.goalsB!==null;
       return`<div class="adm-plyr-row" style="gap:6px;align-items:center;flex-wrap:nowrap;">
         <span style="font-size:12px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;">${m.a}</span>
         <span style="font-size:15px;font-weight:800;min-width:42px;text-align:center;">${has?`${m.goalsA} - ${m.goalsB}`:'vs'}</span>
         <span style="font-size:12px;font-weight:700;flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;">${m.b}</span>
-        <span style="font-size:10px;font-weight:700;width:55px;text-align:center;color:${has?(m.goalsA>m.goalsB?'#4ADE80':m.goalsB>m.goalsA?'#F87171':'#FCD34D'):'var(--text-3)'};">${has?(m.goalsA>m.goalsB?'✅ '+m.a.split(' ')[0]:m.goalsB>m.goalsA?'✅ '+m.b.split(' ')[0]:'تعادل'):'⏳'}</span></div>`;}
+        <span style="font-size:10px;font-weight:700;width:50px;text-align:center;color:${has?(m.goalsA>m.goalsB?'#4ADE80':m.goalsB>m.goalsA?'#F87171':'#FCD34D'):'var(--text-3)'};">${has?(m.goalsA>m.goalsB?'✅ '+m.a.split(' ')[0]:m.goalsB>m.goalsA?'✅ '+m.b.split(' ')[0]:'تعادل'):'⏳'}</span>
+      </div>`;
+    }
     return`<div class="adm-plyr-row" style="gap:5px;align-items:center;flex-wrap:nowrap;">
       <span style="font-size:12px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;">${m.a}</span>
-      <input type="number" inputmode="numeric" min="0" max="99" value="${m.goalsA??''}" placeholder="-" style="width:40px;min-width:40px;text-align:center;padding:5px 2px;border:1.5px solid var(--border-2);border-radius:7px;font-family:'SF Arabic',sans-serif;font-size:14px;font-weight:700;background:var(--bg-3);color:var(--text);" oninput="setVbLG(${mi},'a',this.value)">
+      <input type="number" inputmode="numeric" min="0" max="99" value="${m.goalsA??''}" placeholder="-"
+        style="width:40px;min-width:40px;text-align:center;padding:5px 2px;border:1.5px solid var(--border-2);border-radius:7px;font-family:'SF Arabic',sans-serif;font-size:14px;font-weight:700;background:var(--bg-3);color:var(--text);"
+        oninput="setVbLG(${mi},'a',this.value)">
       <span style="color:var(--text-3);font-size:11px;">vs</span>
-      <input type="number" inputmode="numeric" min="0" max="99" value="${m.goalsB??''}" placeholder="-" style="width:40px;min-width:40px;text-align:center;padding:5px 2px;border:1.5px solid var(--border-2);border-radius:7px;font-family:'SF Arabic',sans-serif;font-size:14px;font-weight:700;background:var(--bg-3);color:var(--text);" oninput="setVbLG(${mi},'b',this.value)">
+      <input type="number" inputmode="numeric" min="0" max="99" value="${m.goalsB??''}" placeholder="-"
+        style="width:40px;min-width:40px;text-align:center;padding:5px 2px;border:1.5px solid var(--border-2);border-radius:7px;font-family:'SF Arabic',sans-serif;font-size:14px;font-weight:700;background:var(--bg-3);color:var(--text);"
+        oninput="setVbLG(${mi},'b',this.value)">
       <span style="font-size:12px;font-weight:700;flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;">${m.b}</span>
-      <span id="vblg-res-${mi}" style="font-size:10px;font-weight:700;width:55px;min-width:55px;text-align:center;color:${m.goalsA!==null&&m.goalsB!==null?(m.goalsA>m.goalsB?'#4ADE80':m.goalsB>m.goalsA?'#F87171':'#FCD34D'):'var(--text-3)'};">
-        ${m.goalsA!==null&&m.goalsB!==null?(m.goalsA>m.goalsB?'✅ '+m.a.split(' ')[0]:m.goalsB>m.goalsA?'✅ '+m.b.split(' ')[0]:'تعادل'):'—'}</span></div>`;
+      <span id="vblg-res-${mi}" style="font-size:10px;font-weight:700;width:50px;text-align:center;color:${m.goalsA!==null&&m.goalsB!==null?(m.goalsA>m.goalsB?'#4ADE80':m.goalsB>m.goalsA?'#F87171':'#FCD34D'):'var(--text-3)'};">
+        ${m.goalsA!==null&&m.goalsB!==null?(m.goalsA>m.goalsB?'✅ '+m.a.split(' ')[0]:m.goalsB>m.goalsA?'✅ '+m.b.split(' ')[0]:'تعادل'):'—'}
+      </span>
+    </div>`;
   }).join('');
-  return progressBar+tblHTML+`<div class="card-head" style="margin:10px 0 8px;">📅 المباريات</div>`+matchRows;
+  return tbl+`<div class="card-head" style="margin:10px 0 8px;">📅 المباريات</div>`+matchRows;
 }
+
+
 function bracketHTML(rounds,editable){
   const names=['دور الـ16','ربع النهائي','نصف النهائي','النهائي'];
   return`<div class="rounds-wrap">${rounds.map((round,ri)=>`<div>
@@ -1896,139 +1637,55 @@ function toggleYr(hdr){hdr.classList.toggle('open');hdr.nextElementSibling.class
 
 function memCardHTML(m,withDel){
   let thumb='';
-  if(m.type==='vid-cloud'&&m.videoUrl){
-    thumb=`<div class="mem-thumb" style="height:160px;"><video src="${m.videoUrl}" style="width:100%;height:100%;object-fit:cover;" controls playsinline></video><span class="mem-vid-badge">🎬 فيديو</span></div>`;
+  if(m.type==='vid-file'&&m.video){
+    thumb=`<div class="mem-thumb"><video src="${m.video}" style="width:100%;height:100%;object-fit:cover;"></video><div class="mem-play">▶️</div><span class="mem-vid-badge">فيديو</span></div>`;
   }else if(m.type==='vid-link'&&m.videoUrl){
     const eid=ytId(m.videoUrl);
     thumb=eid
-      ?`<div class="mem-thumb" style="height:160px;"><iframe src="https://www.youtube.com/embed/${eid}" style="width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe><span class="mem-vid-badge">▶️ يوتيوب</span></div>`
+      ?`<div class="mem-thumb"><iframe src="https://www.youtube.com/embed/${eid}" style="width:100%;height:100%;border:none;" allowfullscreen></iframe></div>`
       :`<div class="mem-thumb"><a href="${m.videoUrl}" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--olive);text-decoration:none;"><span style="font-size:32px;">🔗</span><span style="font-size:11px;">فتح الرابط</span></a><span class="mem-vid-badge">رابط</span></div>`;
   }else{
-    const src=m.img||'';
-    thumb=src
-      ?`<div class="mem-thumb" onclick="openLightbox('${src.replace(/'/g,"\\'")}')"><img src="${src}" alt="" loading="lazy"><div style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:.2s;" onmouseover="this.style.background='rgba(0,0,0,.15)'" onmouseout="this.style.background='rgba(0,0,0,0)'"></div><span class="mem-vid-badge" style="background:rgba(0,0,0,.5);">🔍</span></div>`
-      :`<div class="mem-thumb"><span style="font-size:36px;">📸</span></div>`;
+    thumb=`<div class="mem-thumb">${m.img?`<img src="${m.img}" alt="">`:' 📸'}</div>`;
   }
   return`<div class="mem-card">${thumb}<div class="mem-body"><div class="mem-caption">${m.caption||''}</div>${withDel?`<button class="btn btn-red" style="margin-top:7px;font-size:11px;" onclick="delMem(${m.id})">حذف</button>`:''}</div></div>`;
 }
-function ytId(url){try{const u=new URL(url);if(u.hostname.includes('youtu.be'))return u.pathname.slice(1);if(u.hostname.includes('youtube.com'))return u.searchParams.get('v')||null;return null}catch{return null}}
-function openLightbox(src){const lb=q('lightbox');q('lightbox-img').src=src;lb.classList.add('open');document.body.style.overflow='hidden';}
-function closeLightbox(){q('lightbox').classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
-
-/* ═══ CLOUDINARY CONFIG ═══ */
-const CLD_CLOUD='dm1h6nhf0';
-const CLD_PRESET='Bafrj-2026';
-let cloudinaryVidUrl=''; // رابط الفيديو بعد الرفع
+function ytId(url){try{const u=new URL(url);if(u.hostname.includes('youtu.be'))return u.pathname.slice(1);return u.searchParams.get('v')||null}catch{return null}}
 
 /* ═══ MEDIA TAB ═══ */
 let curTab='img';
 function switchMediaTab(t){
   curTab=t;
-  ['img','vid','link'].forEach(x=>{
-    const el=q('media-'+x);if(el)el.style.display=x===t?'block':'none';
-    const tb=q('mtab-'+x);if(tb)tb.classList.toggle('active',x===t);
-  });
-  if(t==='link'){q('m-vid-url').oninput=previewYT;}
+  ['img','vid','link'].forEach(x=>{q('media-'+x).style.display=x===t?'block':'none';q('mtab-'+x).classList.toggle('active',x===t)});
 }
-function previewYT(){
-  const url=q('m-vid-url').value.trim();
-  const eid=ytId(url);
-  const prev=q('yt-preview'),fr=q('yt-iframe');
-  if(eid){fr.src=`https://www.youtube.com/embed/${eid}`;prev.style.display='block';}
-  else{prev.style.display='none';fr.src='';}
-}
-
-function handleCloudinaryVid(){
+function handleVidFile(){
   const file=q('m-vid-file').files[0];if(!file)return;
-  // تحقق من حجم الملف (100MB max للخطة المجانية)
-  if(file.size>100*1024*1024){toast('⚠️ حجم الفيديو أكبر من 100MB');return}
-  q('m-vid-ph').style.display='none';
-  q('vid-uploading').style.display='block';
-  q('vid-done').style.display='none';
-  cloudinaryVidUrl='';
-  const fd=new FormData();
-  fd.append('file',file);
-  fd.append('upload_preset',CLD_PRESET);
-  const xhr=new XMLHttpRequest();
-  // resource_type في الـ URL وليس في FormData
-  xhr.open('POST',`https://api.cloudinary.com/v1_1/${CLD_CLOUD}/video/upload`,true);
-  xhr.upload.onprogress=e=>{
-    if(e.lengthComputable){
-      const pct=Math.round(e.loaded/e.total*100);
-      q('vid-upload-pct').textContent=`جاري الرفع... ${pct}%`;
-      q('vid-upload-bar').style.width=pct+'%';
-    }
-  };
-  xhr.onload=()=>{
-    q('vid-uploading').style.display='none';
-    if(xhr.status===200){
-      const res=JSON.parse(xhr.responseText);
-      cloudinaryVidUrl=res.secure_url;
-      q('m-vid-prev').src=cloudinaryVidUrl;
-      q('vid-done').style.display='block';
-      toast('✅ تم رفع الفيديو!');
-    }else{
-      q('m-vid-ph').style.display='block';
-      let msg='❌ فشل الرفع';
-      try{const e=JSON.parse(xhr.responseText);if(e.error?.message)msg+=' — '+e.error.message;}catch(e){}
-      toast(msg);
-      console.error('Cloudinary error:',xhr.responseText);
-    }
-  };
-  xhr.onerror=()=>{
-    q('vid-uploading').style.display='none';
-    q('m-vid-ph').style.display='block';
-    toast('❌ خطأ في الاتصال — تحقق من الإنترنت');
-  };
-  xhr.send(fd);
+  const r=new FileReader();r.onload=ev=>{const v=q('m-vid-prev');v.src=ev.target.result;v.style.display='block';q('m-vid-ph').style.display='none';q('m-vid-ch').style.display='flex'};r.readAsDataURL(file);
 }
-function handleVidFile(){/* deprecated */}
 
 /* ═══ SAVE MEMORY ═══ */
-async function saveMem(){
+function saveMem(){
   const year=parseInt(q('m-year').value),cap=q('m-cap').value.trim();
   if(!cap){toast('⚠️ أدخل تعليقاً');return}
-  let row={year,caption:cap};
+  const all=mems(),base={id:Date.now(),year,caption:cap};
   if(curTab==='img'){
     const img=q('m-prev').src;
-    row={...row,type:'image',img:img&&img.startsWith('data:')?img:''};
+    all.push({...base,type:'image',img:img&&img.startsWith('data:')?img:''});
   }else if(curTab==='vid'){
-    if(!cloudinaryVidUrl){toast('⚠️ انتظر حتى ينتهي رفع الفيديو');return}
-    row={...row,type:'vid-cloud',video_url:cloudinaryVidUrl};
+    const vid=q('m-vid-prev').src;
+    if(!vid||!vid.startsWith('data:')){toast('⚠️ اختر ملف فيديو');return}
+    all.push({...base,type:'vid-file',video:vid});
   }else{
     const url=q('m-vid-url').value.trim();
-    if(!url){toast('⚠️ أدخل رابط يوتيوب');return}
-    let eid=null;
-    try{const u=new URL(url);if(u.hostname.includes('youtu.be'))eid=u.pathname.slice(1);else if(u.hostname.includes('youtube.com'))eid=u.searchParams.get('v');}catch(e){}
-    if(!eid){toast('⚠️ الرابط غير صحيح — مثال: https://youtube.com/watch?v=...');return}
-    row={...row,type:'vid-link',video_url:url};
+    if(!url){toast('⚠️ أدخل الرابط');return}
+    all.push({...base,type:'vid-link',videoUrl:url});
   }
-  try{
-    const res=await sbPost('memories',[row]);
-    const nm=res[0];
-    _cache.mems.push({...nm,id:nm.id,videoUrl:nm.video_url});
-  }catch(e){toast('⚠️ خطأ في الحفظ — '+e.message);return;}
-  closeModal('m-mem');
-  resetMemModal();
-  if(ME&&ME.role==='admin')renderAdmin();
-  else renderMemUser();
-  toast('✅ تم الحفظ');
+  sv('mems',all);closeModal('m-mem');resetMemModal();renderAdmin();toast('✅ تم الحفظ');
 }
 function resetMemModal(){
   q('m-cap').value='';
   q('m-prev').src='';q('m-prev').style.display='none';q('m-ph').style.display='block';q('m-ch').style.display='none';
+  q('m-vid-prev').src='';q('m-vid-prev').style.display='none';q('m-vid-ph').style.display='block';q('m-vid-ch').style.display='none';
   q('m-vid-url').value='';
-  const prev=q('yt-preview'),fr=q('yt-iframe');
-  if(prev)prev.style.display='none';if(fr)fr.src='';
-  // reset video upload
-  cloudinaryVidUrl='';
-  const vidPh=q('m-vid-ph'),vidUp=q('vid-uploading'),vidDone=q('vid-done');
-  if(vidPh)vidPh.style.display='block';
-  if(vidUp)vidUp.style.display='none';
-  if(vidDone)vidDone.style.display='none';
-  const bar=q('vid-upload-bar'),pct=q('vid-upload-pct');
-  if(bar)bar.style.width='0%';if(pct)pct.textContent='جاري الرفع... 0%';
   switchMediaTab('img');
 }
 
@@ -2047,56 +1704,73 @@ function renderAdmin(){
   renderAdmPlayers();renderAdmVbPlayers();renderAdmMems();renderAdmBracket();renderAdmVbArea(vbGenTeams());renderSettingsPanel();
 }
 
-async function delUser(phone){if(!confirm('حذف؟'))return;try{await sbDelete('users',`phone=eq.${phone}`);_cache.users=_cache.users.filter(u=>u.phone!==phone);}catch(e){toast('⚠️ خطأ');return;}renderAdmin();toast('✅ تم الحذف')}
+function delUser(phone){if(!confirm('حذف؟'))return;sv('users',users().filter(u=>u.phone!==phone));renderAdmin();toast('✅ تم الحذف')}
 function delDish(id){if(!confirm('حذف؟'))return;sv('dishes',dishes().filter(d=>d.id!==id));renderAdmin();toast('✅ تم الحذف')}
 
 /* Demo inject */
-async function injectDemoPlayers(){
+function injectDemoPlayers(){
+  let plist=players();
+  let added=0;
   const maleOnly=DEMOS.filter(d=>d.gender==='male');
-  const toAdd=maleOnly.filter(d=>!players().find(p=>p.phone===d.phone));
-  if(!toAdd.length){toast('جميع اللاعبين مسجّلون');return}
-  try{
-    const res=await sbPost('players',toAdd.map((d,i)=>({name:d.name,phone:d.phone,level:0,note:'حساب تجريبي',manual:true})));
-    res.forEach(r=>_cache.players.push(r));
-  }catch(e){toast('⚠️ خطأ في الإضافة');return;}
-  renderAdmPlayers();renderStats();toast(`✅ تم تسجيل ${toAdd.length} لاعب`);
+  maleOnly.forEach((d,i)=>{
+    if(!plist.find(p=>p.name===d.name)){
+      plist.push({id:Date.now()+i,name:d.name,phone:d.phone,level:0,note:'حساب تجريبي',manual:true});
+      added++;
+    }
+  });
+  sv('players',plist);renderAdmPlayers();renderStats();toast(`✅ تم تسجيل ${added} لاعب في القرعة`);
 }
 
 /* أطباق عشوائية للإناث */
-const DEMO_DISH_NAMES=['كبسة لحم','مندي دجاج','مجبوس ربيان','جريش بالدجاج','مرق لحم','محاشي ورق عنب','فتة باللحم','سليق بالدجاج','مطبق بالجبن','هريس','عصيدة','مكبوس سمك','خبز تنور','بريان','لوقيمات بالتمر'];
-const DEMO_DISH_DESCS=['وصفة جدتي الأصيلة 💛','بالبهارات الخاصة 🌿','طبق عائلي مميز ✨','من أفضل ما طبخت 🍳','سر في البهارات 🤫','بالطريقة النجدية الأصيلة','وصفة سهلة ولذيذة 😋','مجربة ومضمونة 👌','','بنكهة منزلية لا تُقاوم'];
-async function injectDemoDishes(){
+const DEMO_DISH_NAMES=[
+  'كبسة لحم','مندي دجاج','مجبوس ربيان','جريش بالدجاج','مرق لحم',
+  'محاشي ورق عنب','فتة باللحم','سليق بالدجاج','مطبق بالجبن','هريس',
+  'عصيدة','مكبوس سمك','خبز تنور','بريان','لوقيمات بالتمر'
+];
+const DEMO_DISH_DESCS=[
+  'وصفة جدتي الأصيلة 💛','بالبهارات الخاصة 🌿','طبق عائلي مميز ✨',
+  'من أفضل ما طبخت 🍳','سر في البهارات 🤫','بالطريقة النجدية الأصيلة',
+  'وصفة سهلة ولذيذة 😋','مجربة ومضمونة 👌','','بنكهة منزلية لا تُقاوم'
+];
+function injectDemoDishes(){
   const females=DEMOS.filter(d=>d.gender==='female');
-  const males=DEMOS.filter(d=>d.gender==='male');
+  let all=dishes();
   // أضف المستخدمات الإناث أولاً
-  const newUsers=females.filter(f=>!users().find(u=>u.phone===f.phone));
-  if(newUsers.length){try{const r=await sbPost('users',newUsers.map(f=>({name:f.name,phone:f.phone,gender:'female',role:'user'})));r.forEach(u=>_cache.users.push(u));}catch(e){}}
-  const toAdd=females.filter(f=>!dishes().find(d=>d.owner_phone===f.phone));
-  if(!toAdd.length){toast('كل الأطباق موجودة');return}
-  const rows=toAdd.map((f,i)=>{
-    const ratings={};males.forEach(m=>{if(Math.random()>0.3)ratings[m.phone]=Math.floor(Math.random()*3)+3});
-    return{name:DEMO_DISH_NAMES[i%DEMO_DISH_NAMES.length],description:DEMO_DISH_DESCS[i%DEMO_DISH_DESCS.length],img:'',owner_phone:f.phone,owner_name:f.name,ratings,_demo:true};
+  let ulist=users();
+  females.forEach(f=>{if(!ulist.find(u=>u.phone===f.phone)){ulist.push({id:Date.now()+Math.random(),name:f.name,phone:f.phone,gender:'female',role:'user'})}});
+  sv('users',ulist);
+  let added=0;
+  females.forEach((f,i)=>{
+    if(all.find(d=>d.ownerPhone===f.phone))return; // لديها طبق
+    const name=DEMO_DISH_NAMES[i%DEMO_DISH_NAMES.length];
+    const desc=DEMO_DISH_DESCS[i%DEMO_DISH_DESCS.length];
+    // تقييمات عشوائية من الذكور
+    const males=DEMOS.filter(d=>d.gender==='male');
+    const ratings={};
+    males.forEach(m=>{
+      if(Math.random()>0.3) ratings[m.phone]=Math.floor(Math.random()*3)+3; // 3-5 نجوم
+    });
+    all.push({id:Date.now()+i+Math.floor(Math.random()*9999),name,desc,img:'',ownerPhone:f.phone,ownerName:f.name,ratings,_demo:true});
+    added++;
   });
-  try{const r=await sbPost('dishes',rows);r.forEach(d=>_cache.dishes.push({...d,desc:d.description,ratings:d.ratings||{}}));}catch(e){toast('⚠️ خطأ');return;}
-  renderAdmin();toast(`✅ تم إضافة ${rows.length} طبق تجريبي`);
+  sv('dishes',all);
+  renderAdmin();
+  toast(`✅ تم إضافة ${added} طبق تجريبي`);
 }
-async function clearDemoDishes(){
+function clearDemoDishes(){
   if(!confirm('حذف جميع الأطباق التجريبية؟'))return;
-  const ids=dishes().filter(d=>d._demo).map(d=>d.id);
-  for(const id of ids){try{await sbDelete('dishes',`id=eq.${id}`);}catch(e){}}
-  _cache.dishes=_cache.dishes.filter(d=>!d._demo);
-  renderAdmin();toast('🗑️ تم حذف الأطباق التجريبية');
+  sv('dishes',dishes().filter(d=>!d._demo));
+  renderAdmin();
+  toast('🗑️ تم حذف الأطباق التجريبية');
 }
 
-async function addPlayerManual(){
+function addPlayerManual(){
   const name=q('new-plyr-name').value.trim(),lvl=parseInt(q('new-plyr-lvl').value);
   if(!name){toast('⚠️ أدخل اسم اللاعب');return}
-  if(players().find(p=>p.name===name)){toast('⚠️ هذا اللاعب موجود');return}
-  try{
-    const res=await sbPost('players',[{name,phone:'adm-'+Date.now(),level:lvl,note:'أضافه الأدمن',manual:true}]);
-    _cache.players.push(res[0]);
-  }catch(e){toast('⚠️ خطأ في الإضافة');return;}
-  q('new-plyr-name').value='';q('new-plyr-lvl').value='0';
+  const plist=players();
+  if(plist.find(p=>p.name===name)){toast('⚠️ هذا اللاعب موجود');return}
+  plist.push({id:Date.now(),name,phone:'adm-'+Date.now(),level:lvl,note:'أضافه الأدمن',manual:true});
+  sv('players',plist);q('new-plyr-name').value='';q('new-plyr-lvl').value='0';
   renderAdmPlayers();renderStats();toast(`✅ تم إضافة ${name}`);
 }
 function renderAdmPlayers(){
@@ -2116,8 +1790,8 @@ function renderAdmPlayers(){
     <button class="btn btn-red" onclick="delPlayer(${pl.id})">حذف</button>
   </div>`).join('');
 }
-async function setLvl(id,lvl){const pl=players().find(x=>x.id==id);if(!pl)return;pl.level=parseInt(lvl);try{await sbPatch('players',`id=eq.${id}`,{level:pl.level});}catch(e){toast('⚠️ خطأ');return;}renderAdmPlayers();toast('✅ تم تحديد المستوى')}
-async function delPlayer(id){if(!confirm('حذف؟'))return;try{await sbDelete('players',`id=eq.${id}`);_cache.players=_cache.players.filter(p=>p.id!==id);}catch(e){toast('⚠️ خطأ');return;}renderAdmPlayers();renderStats();toast('✅ تم الحذف')}
+function setLvl(id,lvl){let p=players();const pl=p.find(x=>x.id==id);if(!pl)return;pl.level=parseInt(lvl);sv('players',p);renderAdmPlayers();toast('✅ تم تحديد المستوى')}
+function delPlayer(id){if(!confirm('حذف؟'))return;sv('players',players().filter(p=>p.id!==id));renderAdmPlayers();renderStats();toast('✅ تم الحذف')}
 
 /* ═══ BALANCED TEAMS ═══ */
 const ANIMAL_NAMES=['الصقور','الأسود','الفهود','النمور','الذئاب','الثيران','العقبان','التنانين'];
@@ -2130,7 +1804,7 @@ const ANIMAL_NAMES=['الصقور','الأسود','الفهود','النمور',
 */
 function lvlPower(lvl){return lvl===1?10:lvl===2?7:lvl===3?5:lvl===4?3:lvl===5?1:0}
 
-async function genBalancedTeams(){
+function genBalancedTeams(){
   const p=players(),numTeams=parseInt(q('num-teams-sel').value);
   if(p.length<numTeams){toast(`⚠️ عدد اللاعبين (${p.length}) أقل من عدد الفرق (${numTeams})`);return}
 
@@ -2161,26 +1835,21 @@ async function genBalancedTeams(){
     t.players.push({...pl,level:0});
   });
 
-  _cache.genteams=teams;await sbSetState('genteams',teams);renderAdmTeamsArea(teams);toast('✅ تم التوزيع المتوازن!');
+  sv('genteams',teams);renderAdmTeamsArea(teams);toast('✅ تم التوزيع المتوازن!');
 }
 function reshuffleTeams(){
   // عند إعادة الخلط نحذف الفرق القديمة ونعيد التوزيع مع الحفاظ على الأسماء
   genBalancedTeams();
 }
 
-async function renameTeam(i){
+function renameTeam(i){
   const t=genTeams();if(!t)return;
-  const oldName=t[i].name;
-  const newName=prompt('اسم الفريق الجديد:',oldName);
-  if(!newName||!newName.trim()||newName.trim()===oldName)return;
-  t[i].name=newName.trim();
-  const lg=_cache.league;
-  if(lg){lg.matches.forEach(m=>{if(m.a===oldName)m.a=newName.trim();if(m.b===oldName)m.b=newName.trim()});if(lg.table)lg.table.forEach(r=>{if(r.name===oldName)r.name=newName.trim()});}
-  const br=bracket();
-  if(br){br.forEach(round=>round.forEach(m=>{m.teams=m.teams.map(tm=>tm===oldName?newName.trim():tm)}));_cache.bracket=br;}
-  _cache.genteams=t;
-  await Promise.all([sbSetState('genteams',t),br?sbSetState('bracket',br):Promise.resolve(),lg?sbSetState('league',lg):Promise.resolve()]);
-  renderAdmBracket();toast('✅ تم تغيير الاسم وتحديث الجدول');
+  const newName=prompt('اسم الفريق الجديد:',t[i].name);
+  if(!newName||!newName.trim())return;
+  t[i].name=newName.trim();sv('genteams',t);renderAdmTeamsArea(t);
+  // تحديث الجدول إن وُجد
+  const br=bracket();if(br){sv('bracket',null);localStorage.removeItem(K('bracket'));q('adm-bracket').innerHTML='';toast('✅ تم تغيير الاسم — أعد إنشاء الجدول')}
+  else toast('✅ تم تغيير اسم الفريق');
 }
 
 function renderAdmTeamsArea(teams){
@@ -2200,27 +1869,30 @@ function renderAdmTeamsArea(teams){
   </div>`).join('')}</div>
   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
     <button class="btn btn-olive" onclick="genBracket()">🏆 خروج مباشر (Knockout)</button>
-    <button class="btn btn-ghost" onclick="genLeague()">📋 دوري نقطي (Round Robin)</button>  </div>`;
+    <button class="btn btn-ghost" onclick="genLeague()">📋 دوري نقطي (Round Robin)</button>
+  </div>`;
 }
-async function clearAll(){if(!confirm('مسح الفرق والقرعة؟'))return;_cache.genteams=null;_cache.bracket=null;_cache.league=null;await Promise.all([sbSetState('genteams',null),sbSetState('bracket',null),sbSetState('league',null)]);q('teams-result-area').innerHTML='';q('adm-bracket').innerHTML='';toast('🗑️ تم المسح')}
-async function genBracket(){
+function clearAll(){if(!confirm('مسح الفرق والقرعة؟'))return;sv('genteams',null);sv('bracket',null);localStorage.removeItem(K('genteams'));localStorage.removeItem(K('bracket'));q('teams-result-area').innerHTML='';q('adm-bracket').innerHTML='';toast('🗑️ تم المسح')}
+function genBracket(){
   const teams=genTeams();if(!teams||!teams.length){toast('⚠️ أنشئ الفرق أولاً');return}
-  const rounds=buildBracket(teams.map(t=>t.name).sort(()=>Math.random()-.5));
-  _cache.bracket=rounds;_cache.league=null;
-  await Promise.all([sbSetState('bracket',rounds),sbSetState('league',null)]);
+  sv('leaguemode',false);localStorage.removeItem(K('league'));
+  sv('bracket',buildBracket(teams.map(t=>t.name).sort(()=>Math.random()-.5)));
   renderAdmBracket();toast('✅ تم إنشاء جدول الخروج المباشر');
 }
 function genLeague(){
   const teams=genTeams();if(!teams||!teams.length){toast('⚠️ أنشئ الفرق أولاً');return}
+  sv('leaguemode',true);sv('bracket',null);localStorage.removeItem(K('bracket'));
+  // فتح نافذة إعدادات الدوري
   openModal('m-league-cfg');
 }
-async function startLeagueWithCfg(){
+
+function startLeagueWithCfg(){
   const teams=genTeams();if(!teams)return;
   const names=teams.map(t=>t.name);
-  const legs=parseInt(q('cfg-legs').value)||1;
-  const winPts=parseInt(q('cfg-winpts').value)||3;
-  const drawPts=parseInt(q('cfg-drawpts').value)||1;
-  const extraTime=q('cfg-et').checked;
+  const legs=parseInt(q('cfg-legs').value)||1;         // ذهاب فقط أم ذهاب وإياب
+  const winPts=parseInt(q('cfg-winpts').value)||3;     // نقاط الفوز
+  const drawPts=parseInt(q('cfg-drawpts').value)||1;   // نقاط التعادل
+  const extraTime=q('cfg-et').checked;                  // وقت إضافي بدل التعادل
   const matches=[];
   for(let i=0;i<names.length;i++){
     for(let j=i+1;j<names.length;j++){
@@ -2230,9 +1902,7 @@ async function startLeagueWithCfg(){
   }
   const table=names.map(n=>({name:n,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}));
   const cfg={legs,winPts,drawPts,extraTime};
-  const leagueData={matches,table,cfg};
-  _cache.league=leagueData;_cache.bracket=null;
-  await Promise.all([sbSetState('league',leagueData),sbSetState('bracket',null)]);
+  sv('league',{matches,table,cfg});
   closeModal('m-league-cfg');
   renderAdmBracket();
   toast(`✅ تم إنشاء الدوري — ${matches.length} مباراة`);
@@ -2329,7 +1999,7 @@ function leagueHTML(lg,readOnly=false){
 }
 
 window.setLG=(mi,side,val)=>{
-  const lg=_cache.league;if(!lg)return;
+  const lg=ld('league');if(!lg)return;
   const v=val===''?null:parseInt(val);
   if(v!==null&&(isNaN(v)||v<0))return;
   lg.matches[mi][side==='a'?'goalsA':'goalsB']=v;
@@ -2348,7 +2018,7 @@ window.setLG=(mi,side,val)=>{
     else if(!cfg.extraTime){ra.d++;ra.pts+=cfg.drawPts;rb.d++;rb.pts+=cfg.drawPts}
     else{ra.d++;rb.d++}
   });
-  sbSetState('league',lg);
+  sv('league',lg);
 
   // تحديث الجدول فقط بدون إعادة رسم المباريات (يمنع التمرير والـ reset)
   const tblEl=document.getElementById('lg-table-body');
@@ -2390,9 +2060,9 @@ function buildBracket(t){
 }
 function renderAdmBracket(){
   const teams=genTeams();if(teams)renderAdmTeamsArea(teams);
-  const isLeague=_cache.league;
+  const isLeague=ld('leaguemode');
   if(isLeague){
-    const lg=_cache.league;
+    const lg=ld('league');
     q('adm-bracket').innerHTML=lg?`<div class="card"><div class="card-head">📋 الدوري النقطي <span style="font-size:11px;color:var(--gray);font-weight:400;">— إدخال النتائج وعرض الترتيب</span></div>${leagueHTML(lg)}</div>`:'';
   }else{
     const br=bracket();
@@ -2423,7 +2093,7 @@ function renderAdmMems(){
     </div>`;
   }).join('');
 }
-async function delMem(id){if(!confirm('حذف؟'))return;try{await sbDelete('memories',`id=eq.${id}`);_cache.mems=_cache.mems.filter(m=>m.id!==id);}catch(e){toast('⚠️ خطأ');return;}renderAdmin();toast('✅ تم الحذف')}
+function delMem(id){if(!confirm('حذف؟'))return;sv('mems',mems().filter(m=>m.id!==id));renderAdmin();toast('✅ تم الحذف')}
 
 /* ═══ HELPERS ═══ */
 function openModal(id){q(id).classList.add('open')}
@@ -2574,45 +2244,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('m-league-cfg')">إلغاء</button>
       <button class="btn btn-olive" onclick="startLeagueWithCfg()">🏁 إنشاء الدوري</button>
-    </div>
-  </div>
-</div>
-
-<!-- VB League Config Modal -->
-<div class="overlay" id="m-vb-league-cfg">
-  <div class="modal" style="max-width:400px;">
-    <button class="modal-x" onclick="closeModal('m-vb-league-cfg')">✕</button>
-    <div class="modal-title">📋 إعدادات دوري الطائرة</div>
-    <div class="f-group">
-      <label>نظام المباريات</label>
-      <select id="vbcfg-legs" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'SF Arabic',sans-serif;font-size:14px;background:var(--cream);outline:none;">
-        <option value="1">ذهاب فقط (كل فريق يلعب ضد الآخر مرة)</option>
-        <option value="2">ذهاب وإياب (مرتين)</option>
-      </select>
-    </div>
-    <div class="f-row">
-      <div class="f-group">
-        <label>نقاط الفوز</label>
-        <select id="vbcfg-winpts" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'SF Arabic',sans-serif;font-size:14px;background:var(--cream);outline:none;">
-          <option value="3" selected>3 نقاط</option>
-          <option value="2">2 نقطة</option>
-          <option value="1">1 نقطة</option>
-        </select>
-      </div>
-      <div class="f-group">
-        <label>نقاط التعادل</label>
-        <select id="vbcfg-drawpts" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'SF Arabic',sans-serif;font-size:14px;background:var(--cream);outline:none;">
-          <option value="1" selected>1 نقطة</option>
-          <option value="0">0 نقطة</option>
-        </select>
-      </div>
-    </div>
-    <div class="info-bar" style="font-size:12px;">
-      💡 عدد المباريات = عدد الفرق × (عدد الفرق − 1) ÷ 2 × عدد الجولات
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="closeModal('m-vb-league-cfg')">إلغاء</button>
-      <button class="btn btn-olive" onclick="startVbLeagueWithCfg()">🏁 إنشاء الدوري</button>
     </div>
   </div>
 </div>
