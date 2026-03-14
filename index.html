@@ -91,12 +91,12 @@
   --gray-light:#C8C5BF;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{overflow-x:hidden;max-width:100vw}
+html,body{overflow:hidden;max-width:100vw;height:100%;width:100%}
 html{color-scheme:dark}
 html[data-theme="light"]{color-scheme:light}
 body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont','Helvetica Neue','Arial',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg-2)}::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:4px}
-.screen{display:none;min-height:100vh;flex-direction:column}.screen.active{display:flex}
+.screen{display:none;height:100vh;width:100%;flex-direction:column;overflow:hidden}.screen.active{display:flex}
 @keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes zoomOut{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
@@ -105,7 +105,7 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 
 
 /* LOGIN */
-#screen-login{align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;min-height:100vh;background:var(--bg)}
+#screen-login{align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;height:100vh;width:100%;background:var(--bg)}
 /* splash bg fills screen fully with higher opacity */
 .login-bg-layer{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
 .login-bg-layer.loaded{opacity:.55}
@@ -133,15 +133,15 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .btn-enter:hover{background:var(--accent-mid);transform:translateY(-1px);box-shadow:var(--shadow-accent)}
 
 /* LAYOUT */
-#screen-user{background:var(--cream);padding-top:62px;height:100vh;overflow:hidden;display:flex;flex-direction:column;}
-.top-nav{background:var(--white);border-bottom:1px solid var(--border);height:62px;padding:0 16px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:fixed;top:0;left:0;right:0;z-index:200;box-shadow:var(--shadow-sm)}
+#screen-user{background:var(--cream);padding-top:64px;height:100vh;overflow:hidden;display:flex;flex-direction:column;}
+.top-nav{background:var(--white);border-bottom:1px solid var(--border);height:64px;padding:0 16px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:fixed;top:0;left:0;right:0;z-index:500;box-shadow:var(--shadow-sm);flex-shrink:0;}
 .nav-right{display:flex;align-items:center;justify-content:flex-start}
 .nav-left{display:flex;align-items:center;justify-content:flex-end}
-.nav-brand{font-family:'SF Arabic',sans-serif;font-size:18px;color:var(--accent);font-weight:900;letter-spacing:-.03em;text-align:center;white-space:nowrap}
+.nav-brand{font-family:'SF Arabic',sans-serif;font-size:20px;color:var(--accent);font-weight:900;letter-spacing:-.03em;text-align:center;white-space:nowrap}
 .nav-name{font-size:12px;font-weight:600;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
 /* compact icon button — theme + logout */
-.nav-icon-btn{display:flex;align-items:center;justify-content:center;padding:8px 15px;border:1px solid var(--border);background:none;border-radius:10px;font-family:'SF Arabic',sans-serif;font-size:14px;font-weight:700;color:var(--text-3);cursor:pointer;transition:var(--tr);line-height:1;gap:5px}
-.nav-icon-btn .tt-icon{font-size:20px}
+.nav-icon-btn{display:flex;align-items:center;justify-content:center;padding:9px 16px;border:1px solid var(--border);background:none;border-radius:10px;font-family:'SF Arabic',sans-serif;font-size:15px;font-weight:700;color:var(--text-3);cursor:pointer;transition:var(--tr);line-height:1;gap:6px}
+.nav-icon-btn .tt-icon{font-size:22px}
 .nav-icon-btn:hover{border-color:var(--accent);color:var(--accent)}
 .nav-logout{color:var(--text-3)}
 .nav-logout:hover{border-color:var(--danger);color:var(--danger)}
@@ -166,34 +166,29 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .sb-item.active{background:var(--olive-pale);color:var(--olive);font-weight:700;border-right-color:var(--olive)}
 .content-area{flex:1;overflow-y:auto;overflow-x:hidden;min-width:0;-webkit-overflow-scrolling:touch;}
 .page{display:none;padding:20px 16px 100px;max-width:860px;margin:0 auto}.page.active{display:block;animation:fadeIn .25s ease both}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);display:flex;align-items:stretch;z-index:200;box-shadow:0 -2px 12px rgba(0,0,0,.06);height:60px;}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);display:flex;align-items:stretch;z-index:500;box-shadow:0 -2px 12px rgba(0,0,0,.06);height:64px;flex-shrink:0;}
 .bn-group{display:flex;flex:1}
 .bn-item{
   flex:1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:8px 0;
+  padding:6px 0;
   background:none;border:none;
-  font-family:'SF Arabic',sans-serif;font-size:11px;font-weight:700;
-  color:var(--gray);cursor:pointer;gap:3px;position:relative;
+  font-family:'SF Arabic',sans-serif;font-size:13px;font-weight:700;
+  color:var(--gray);cursor:pointer;gap:4px;position:relative;
   transition:color .2s ease;
   min-width:0;
-  /* أبعاد ثابتة لا تتغير */
-  height:60px;
+  height:64px;
 }
 .bn-item .ic{
-  font-size:26px;
+  font-size:30px;
   display:block;
-  /* الأيقونة ثابتة الحجم دائماً */
   transition:transform .2s ease;
 }
 .bn-item.active{color:var(--olive);font-weight:800}
-.bn-item.active .ic{
-  transform:scale(1.15);
-  /* تكبير خفيف بدون تغيير font-size */
-}
+.bn-item.active .ic{transform:scale(1.18);}
 .bn-item.active::before{
   content:'';position:absolute;
-  top:0;left:20%;right:20%;
+  top:0;left:18%;right:18%;
   height:3px;background:var(--olive);
   border-radius:0 0 4px 4px;
 }
@@ -1115,20 +1110,22 @@ function loadSession(){try{const s=sessionStorage.getItem('bfj_s');if(s)ME=JSON.
 
 async function doLogin(){
   const name=q('inp-name').value.trim(),phone=q('inp-phone').value.trim(),gender=q('inp-gender').value,err=q('err-login');
-  if(!name||!phone||!gender){err.style.display='block';err.textContent='⚠️ يرجى ملء جميع الحقول';return}
-  if(!phone.startsWith('05')){err.style.display='block';err.textContent='⚠️ رقم الجوال يجب أن يبدأ بـ 05';return}
-  if(phone.length!==10){err.style.display='block';err.textContent='⚠️ رقم الجوال يجب أن يكون 10 أرقام';return}
   err.style.display='none';
-  // loading state
   const btn=q('btn-login');
   const origTxt=btn?btn.textContent:'';
-  if(btn){btn.disabled=true;btn.textContent='جاري الدخول...';}
+  // ── تحقق الأدمن أولاً قبل أي validation ──
   if(name==='احمد'&&phone==='0534967452'){
-    ME={name,phone,gender,role:'admin'};saveSession();
+    if(btn){btn.disabled=true;btn.textContent='جاري الدخول...';}
+    ME={name,phone,gender:gender||'male',role:'admin'};saveSession();
     await fetchAll();showScreen('admin');renderAdmin();
     if(btn){btn.disabled=false;btn.textContent=origTxt;}
     return;
   }
+  // validation للمستخدمين العاديين فقط
+  if(!name||!phone||!gender){err.style.display='block';err.textContent='⚠️ يرجى ملء جميع الحقول';return}
+  if(!phone.startsWith('05')){err.style.display='block';err.textContent='⚠️ رقم الجوال يجب أن يبدأ بـ 05';return}
+  if(phone.length!==10){err.style.display='block';err.textContent='⚠️ رقم الجوال يجب أن يكون 10 أرقام';return}
+  if(btn){btn.disabled=true;btn.textContent='جاري الدخول...';}
   try{
     const existing=await withTimeout(sbGet('users',`phone=eq.${phone}&select=*`),10000);
     let u;
@@ -1711,10 +1708,6 @@ function renderFootballUser(){
       return`<div class="plyr-card" style="${isCap?'border:2px solid #F59E0B;':isMvp?'border:2px solid #8B5CF6;':''}">
         <div><div class="plyr-name-t">${p.name}${isCap?' 🅱️':isMvp?' 🏅':''}</div>
         <div class="plyr-lvl-t" style="color:${p.level?LVL_COLORS[p.level]:'var(--gray)'};font-weight:${p.level?700:400};">${p.level?getPlayerTitle(p):'بانتظار التقييم'}</div></div>
-        <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">
-          <button class="btn" style="font-size:10px;padding:3px 7px;background:${isCap?'#F59E0B':'var(--surface-2)'};color:${isCap?'#000':'var(--text-2)'};" onclick="setFootballCaptain('${p.phone}','${p.name}')">🅱️ كابتن</button>
-          <button class="btn" style="font-size:10px;padding:3px 7px;background:${isMvp?'#8B5CF6':'var(--surface-2)'};color:${isMvp?'#fff':'var(--text-2)'};" onclick="setFootballMVP('${p.phone}','${p.name}')">🏅 MVP</button>
-        </div>
       </div>`;
     }).join('');
     html+=`</div></div>`;
@@ -1959,11 +1952,15 @@ async function editVbTeamName(i){
   renderAdmVbArea(cur);toast('✅ تم تغيير الاسم وتحديث الجدول');
 }
 async function genVbBracket(){
-  const teams=vbGenTeams();
-  if(!teams||!teams.length){toast('⚠️ وزّع الفرق أولاً');return;}
-  const names=teams.map(t=>t.name).filter(Boolean);
+  let teams=vbGenTeams();
+  // إذا الـ cache فارغ جلب من Supabase
+  if(!teams||!teams.length){
+    const fresh=await safeFetch(()=>sbState('vb_genteams'));
+    if(fresh){_cache.vbGenteams=fresh;teams=fresh;}
+  }
+  if(!teams||!teams.length){toast('⚠️ وزّع الفرق أولاً من لوحة التحكم');return;}
+  const names=teams.map(t=>t.name).filter(n=>n&&n!=='BYE');
   if(names.length<2){toast('⚠️ تحتاج فريقين على الأقل');return;}
-  // أكمل إلى أقرب قوة 2
   const padded=[...names];
   while(padded.length&(padded.length-1))padded.push('BYE');
   function makeRound(ts){
@@ -1978,7 +1975,7 @@ async function genVbBracket(){
   await Promise.all([sbSetState('vb_bracket',rounds),sbSetState('vb_league',null)]);
   renderAdmVbArea(teams);
   renderVolleyballUser();
-  toast('✅ تم إنشاء جدول الخروج المباشر');
+  toast('✅ تم إنشاء جدول الخروج المباشر — '+names.length+' فرق');
 }
 async function setVbW(ri,mi,w){
   let rounds=vbBracket();if(!rounds)return;
