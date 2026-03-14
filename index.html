@@ -99,6 +99,8 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .screen{display:none;min-height:100vh;flex-direction:column}.screen.active{display:flex}
 @keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes zoomOut{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+#screen-user.active,#screen-admin.active{animation:zoomOut .45s cubic-bezier(.4,0,.2,1) both}
 
 /* LOGIN */
 #screen-login{align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;min-height:100vh;background:var(--bg)}
@@ -136,8 +138,8 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .nav-brand{font-family:'SF Arabic',sans-serif;font-size:18px;color:var(--accent);font-weight:900;letter-spacing:-.03em;text-align:center;white-space:nowrap}
 .nav-name{font-size:12px;font-weight:600;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
 /* compact icon button — theme + logout */
-.nav-icon-btn{display:flex;align-items:center;justify-content:center;padding:7px 13px;border:1px solid var(--border);background:none;border-radius:10px;font-family:'SF Arabic',sans-serif;font-size:13px;font-weight:700;color:var(--text-3);cursor:pointer;transition:var(--tr);line-height:1;gap:4px}
-.nav-icon-btn .tt-icon{font-size:18px}
+.nav-icon-btn{display:flex;align-items:center;justify-content:center;padding:8px 15px;border:1px solid var(--border);background:none;border-radius:10px;font-family:'SF Arabic',sans-serif;font-size:14px;font-weight:700;color:var(--text-3);cursor:pointer;transition:var(--tr);line-height:1;gap:5px}
+.nav-icon-btn .tt-icon{font-size:20px}
 .nav-icon-btn:hover{border-color:var(--accent);color:var(--accent)}
 .nav-logout{color:var(--text-3)}
 .nav-logout:hover{border-color:var(--danger);color:var(--danger)}
@@ -157,25 +159,25 @@ body{font-family:'SF Arabic','SF Pro Arabic','-apple-system','BlinkMacSystemFont
 .sidebar,.bottom-nav{position:relative;z-index:101;}
 .content-area{position:relative;z-index:1;}
 .sidebar{display:none;width:206px;background:var(--white);border-left:1px solid var(--border);padding:16px 0;flex-direction:column;position:sticky;top:56px;height:calc(100vh - 56px);flex-shrink:0;overflow-y:auto}
-.sb-item{display:flex;align-items:center;gap:9px;padding:11px 18px;font-size:13px;font-weight:500;color:var(--dark-mid);cursor:pointer;border:none;background:none;width:100%;text-align:right;transition:var(--tr);border-right:3px solid transparent;font-family:'SF Arabic',sans-serif}
-.sb-item .ic{font-size:17px}.sb-item:hover{background:var(--olive-xpale);color:var(--olive)}
+.sb-item{display:flex;align-items:center;gap:10px;padding:13px 18px;font-size:15px;font-weight:700;color:var(--dark-mid);cursor:pointer;border:none;background:none;width:100%;text-align:right;transition:var(--tr);border-right:3px solid transparent;font-family:'SF Arabic',sans-serif}
+.sb-item .ic{font-size:22px}.sb-item:hover{background:var(--olive-xpale);color:var(--olive)}
 .sb-item.active{background:var(--olive-pale);color:var(--olive);font-weight:700;border-right-color:var(--olive)}
 .content-area{flex:1;overflow-y:auto;overflow-x:hidden;min-width:0}
 .page{display:none;padding:20px 16px 100px;max-width:860px;margin:0 auto}.page.active{display:block;animation:fadeIn .25s ease both}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);display:flex;align-items:stretch;z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.06)}
 .bn-group{display:flex;flex:1}
-.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 7px;background:none;border:none;font-family:'SF Arabic',sans-serif;font-size:11px;font-weight:500;color:var(--gray);cursor:pointer;gap:3px;position:relative;transition:var(--tr)}
-.bn-item .ic{font-size:24px;transition:var(--tr)}
-.bn-item.active{color:var(--olive);font-weight:700}
-.bn-item.active .ic{font-size:28px}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 4px 8px;background:none;border:none;font-family:'SF Arabic',sans-serif;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;gap:4px;position:relative;transition:var(--tr)}
+.bn-item .ic{font-size:28px;transition:var(--tr)}
+.bn-item.active{color:var(--olive);font-weight:800}
+.bn-item.active .ic{font-size:32px}
 .bn-item.active::before{content:'';position:absolute;top:0;left:15%;right:15%;height:2.5px;background:var(--olive);border-radius:0 0 3px 3px}
 .bn-home{flex:0 0 72px;border-left:1px solid var(--border);border-right:1px solid var(--border);background:var(--bg-3);}
 /* للأنثى: nav بعنصرين فقط */
 .bottom-nav.female-nav .bn-group:first-child{display:none;}
+.bottom-nav.female-nav .bn-football,.bottom-nav.female-nav .bn-volleyball{display:none;}
 .bottom-nav.female-nav{justify-content:stretch;}
-.bottom-nav.female-nav .bn-home{flex:1;border-left:1px solid var(--border);border-right:none;}
+.bottom-nav.female-nav .bn-dishes{flex:1;}
 .bottom-nav.female-nav .bn-group:last-child{flex:1;}
-.bottom-nav.female-nav .bn-group:last-child .bn-item[data-tab="dishes"]{flex:1;}
 @media(min-width:768px){.sidebar{display:flex}.bottom-nav{display:none}.page{padding-bottom:24px}}
 
 /* COMPONENTS */
@@ -486,7 +488,7 @@ img:not([src]),img[src='']{display:none!important}
     <div class="nav-right">
       <button class="nav-icon-btn" onclick="openSettingsSheet()" title="الإعدادات"><span style="font-size:16px;">⚙️</span></button>
     </div>
-    <div class="nav-brand" style="font-size:17px;font-weight:900;letter-spacing:-.02em;">إستراحة آل بافرج</div>
+    <div class="nav-brand" style="font-size:20px;font-weight:900;letter-spacing:-.03em;">إستراحة آل بافرج</div>
     <div class="nav-left">
       <button class="nav-icon-btn nav-logout" onclick="doLogout()">خروج</button>
     </div>
@@ -583,9 +585,9 @@ img:not([src]),img[src='']{display:none!important}
       <button class="bn-item bn-football" data-tab="football" onclick="goTab('football',this)"><span class="ic">⚽</span>القدم</button>
       <button class="bn-item bn-volleyball" data-tab="volleyball" onclick="goTab('volleyball',this)"><span class="ic">🏐</span>الطائرة</button>
     </div>
-    <button class="bn-item bn-home active" data-tab="home" onclick="goTab('home',this)"><span class="ic">🏠</span>الرئيسية</button>
+    <button class="bn-item bn-dishes" data-tab="dishes" onclick="goTab('dishes',this)"><span class="ic">🍽️</span>الأطباق</button>
     <div class="bn-group">
-      <button class="bn-item" data-tab="dishes" onclick="goTab('dishes',this)"><span class="ic">🍽️</span>الأطباق</button>
+      <button class="bn-item bn-home active" data-tab="home" onclick="goTab('home',this)"><span class="ic">🏠</span>الرئيسية</button>
     </div>
   </nav>
 </div>
@@ -1055,7 +1057,7 @@ async function safeFetch(fn){
 }
 async function fetchAll(){
   // كل طلب مستقل — فشل واحد لا يوقف الباقين
-  const [u,d,p,vp,gt,br,vgt,vbr,vblg,lg]=await Promise.all([
+  const [u,d,p,vp,gt,br,vgt,vbr,vblg,lg,fc,fmvp]=await Promise.all([
     safeFetch(()=>sbGet('users','select=*&order=id')),
     safeFetch(()=>sbGet('dishes','select=*&order=id')),
     safeFetch(()=>sbGet('players','select=*&order=id')),
@@ -1066,6 +1068,8 @@ async function fetchAll(){
     safeFetch(()=>sbState('vb_bracket')),
     safeFetch(()=>sbState('vb_league')),
     safeFetch(()=>sbState('league')),
+    safeFetch(()=>sbState('football_captain')),
+    safeFetch(()=>sbState('football_mvp')),
   ]);
   if(!u){
     // الاتصال فاشل كلياً — أعد المحاولة مرة واحدة بعد ثانيتين
@@ -1079,6 +1083,8 @@ async function fetchAll(){
   _cache.genteams=gt||null;_cache.bracket=br||null;
   _cache.vbGenteams=vgt||null;_cache.vbBracket=vbr||null;
   _cache.vb_league=vblg||null;_cache.league=lg||null;
+  if(fc)sv('football_captain',fc);
+  if(fmvp)sv('football_mvp',fmvp);
 }
 
 /* ═══ SESSION ═══ */
@@ -1353,6 +1359,8 @@ function initUser(){
   // memories section removed
   q('home-male-view').style.display=f?'none':'block';
   q('home-female-view').style.display=f?'block':'none';
+  // افتح قسم الرئيسية دائماً عند أول دخول
+  goTab('home',document.querySelector('[data-tab="home"]'));
   renderStats();renderHomeTop3();renderDishes();renderFootballUser();if(!f)renderVolleyballUser();
   const _sa=q('screen-admin');if(_sa)_sa.classList.remove('active');
 }
@@ -1526,7 +1534,7 @@ function renderDishes(){
     const displayName=isMale?chefTitle(dish.ownerPhone):dish.ownerName;
     const animStyle=isFemale?`style="animation-delay:${idx*0.06}s"`:''
     return`<div class="dish-card${isFemale?' dish-card-female':''}" ${animStyle}>
-      <div class="dish-thumb">${dish.img?`<img src="${dish.img}" alt="">`:'🍲'}</div>
+      <div class="dish-thumb" ${dish.img?`onclick="openDishLightbox('${dish.img}')" style="cursor:zoom-in;"`:''}>${dish.img?`<img src="${dish.img}" alt="" style="pointer-events:none;">`:'🍲'}</div>
       <div class="dish-body">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:5px;">
           <div class="dish-name">${dish.name}</div>${isOwner?'<span class="own-tag">طبقكِ</span>':''}
@@ -1667,14 +1675,38 @@ function renderFootballUser(){
   }
   html+=`</div>`;
 
-  // اللاعبون — بدون أرقام المستوى
+  // اللاعبون + كابتن + MVP
   if(plist.length){
+    const cap=getFootballCaptain(),mvp=getFootballMVP();
     html+=`<div class="card"><div class="card-head">👥 اللاعبون (${plist.length})</div><div class="plyr-grid">`;
-    html+=plist.map(p=>`<div class="plyr-card">
-      <div><div class="plyr-name-t">${p.name}</div>
-      <div class="plyr-lvl-t" style="color:${p.level?LVL_COLORS[p.level]:'var(--gray)'};font-weight:${p.level?700:400};">${p.level?getPlayerTitle(p):'بانتظار التقييم'}</div></div>
-    </div>`).join('');
+    html+=plist.map(p=>{
+      const isCap=cap&&cap.phone===p.phone;
+      const isMvp=mvp&&mvp.phone===p.phone;
+      return`<div class="plyr-card" style="${isCap?'border:2px solid #F59E0B;':isMvp?'border:2px solid #8B5CF6;':''}">
+        <div><div class="plyr-name-t">${p.name}${isCap?' 🅱️':isMvp?' 🏅':''}</div>
+        <div class="plyr-lvl-t" style="color:${p.level?LVL_COLORS[p.level]:'var(--gray)'};font-weight:${p.level?700:400};">${p.level?getPlayerTitle(p):'بانتظار التقييم'}</div></div>
+        <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">
+          <button class="btn" style="font-size:10px;padding:3px 7px;background:${isCap?'#F59E0B':'var(--surface-2)'};color:${isCap?'#000':'var(--text-2)'};" onclick="setFootballCaptain('${p.phone}','${p.name}')">🅱️ كابتن</button>
+          <button class="btn" style="font-size:10px;padding:3px 7px;background:${isMvp?'#8B5CF6':'var(--surface-2)'};color:${isMvp?'#fff':'var(--text-2)'};" onclick="setFootballMVP('${p.phone}','${p.name}')">🏅 MVP</button>
+        </div>
+      </div>`;
+    }).join('');
     html+=`</div></div>`;
+  }
+
+  // كابتن + MVP بارز
+  const cap=getFootballCaptain(),mvp=getFootballMVP();
+  if(cap||mvp){
+    html+=`<div class="card" style="border:1.5px solid var(--accent);">`;
+    if(mvp)html+=`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:${cap?'1px solid var(--border)':'none'};">
+      <div style="font-size:28px;">🏅</div>
+      <div><div style="font-size:11px;color:var(--text-3);font-weight:600;">أفضل لاعب في البطولة</div>
+      <div style="font-size:18px;font-weight:900;color:var(--accent);">${mvp.name}</div></div></div>`;
+    if(cap)html+=`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;">
+      <div style="font-size:28px;">🅱️</div>
+      <div><div style="font-size:11px;color:var(--text-3);font-weight:600;">كابتن الفرق</div>
+      <div style="font-size:18px;font-weight:900;color:#F59E0B;">${cap.name}</div></div></div>`;
+    html+=`</div>`;
   }
 
   // الفرق — بدون أرقام المستوى
@@ -1683,10 +1715,14 @@ function renderFootballUser(){
     html+=`<div class="card"><div class="card-head">🏆 الفرق المُوزَّعة</div><div class="teams-result">`;
     html+=teams.map((t,i)=>`<div class="team-result-card">
       <div class="team-result-name" style="color:${colors[i%colors.length]};">⚽ ${t.name}</div>
-      ${t.players.map(pl=>`<div class="team-plyr-item">
-        <div style="width:18px;height:18px;border-radius:50%;background:${pl.level?LVL_COLORS[pl.level]:'var(--border)'};flex-shrink:0;"></div>
-        <span>${pl.name}</span>${pl.level?`<span style="font-size:10px;color:${LVL_COLORS[pl.level]};font-weight:700;margin-right:auto;">${getPlayerTitle(pl)}</span>`:''}
-      </div>`).join('')}
+      ${t.players.map(pl=>{
+        const isCap=cap&&cap.phone===pl.phone,isMvp=mvp&&mvp.phone===pl.phone;
+        return`<div class="team-plyr-item">
+          <div style="width:18px;height:18px;border-radius:50%;background:${pl.level?LVL_COLORS[pl.level]:'var(--border)'};flex-shrink:0;"></div>
+          <span>${pl.name}</span>
+          ${isMvp?'<span style="font-size:12px;margin-right:auto;">🏅</span>':isCap?'<span style="font-size:12px;margin-right:auto;">🅱️</span>':pl.level?`<span style="font-size:10px;color:${LVL_COLORS[pl.level]};font-weight:700;margin-right:auto;">${getPlayerTitle(pl)}</span>`:''}
+        </div>`;
+      }).join('')}
     </div>`).join('');
     html+=`</div></div>`;
   }
@@ -1910,13 +1946,30 @@ async function genVbBracket(){
 async function setVbW(ri,mi,w){
   let rounds=vbBracket();if(!rounds)return;
   rounds[ri][mi].winner=w;
-  if(ri+1<rounds.length){const nmi=Math.floor(mi/2);rounds[ri+1][nmi].teams[mi%2]=rounds[ri][mi].teams[w]}
-  else if(!rounds[ri+1]){
-    const winners=rounds[ri].map(m=>m.teams[m.winner??0]).filter(Boolean);
-    if(winners.length>1){const r=[];for(let i=0;i<winners.length;i+=2)r.push({teams:[winners[i],winners[i+1]||''],winner:null});rounds.push(r)}
+  // تقدم للجولة التالية
+  if(ri+1<=rounds.length-1){
+    const nmi=Math.floor(mi/2);
+    if(rounds[ri+1]&&rounds[ri+1][nmi])
+      rounds[ri+1][nmi].teams[mi%2]=rounds[ri][mi].teams[w];
+  } else {
+    // أنشئ جولة جديدة إذا كل الفائزين معروفون
+    const winners=rounds[ri].filter(m=>m.winner!==null).map(m=>m.teams[m.winner]);
+    if(winners.length===rounds[ri].length&&winners.length>1){
+      const r=[];
+      for(let i=0;i<winners.length;i+=2)
+        r.push({teams:[winners[i],winners[i+1]||''],winner:null});
+      rounds.push(r);
+    }
   }
   _cache.vbBracket=rounds;
-  await sbSetState('vb_bracket',rounds);renderAdmVbArea(vbGenTeams());
+  await sbSetState('vb_bracket',rounds);
+  renderAdmVbArea(vbGenTeams());
+  renderVolleyballUser();
+}
+function openVbLeagueCfg(){
+  const teams=vbGenTeams();
+  if(!teams||!teams.length){toast('⚠️ وزّع الفرق أولاً');return;}
+  openModal('m-vb-league-cfg');
 }
 async function startVbLeagueWithCfg(){
   const teams=vbGenTeams();if(!teams||!teams.length){toast('⚠️ أنشئ الفرق أولاً');return}
@@ -2025,11 +2078,14 @@ function bracketHTML(rounds,editable){
   return`<div class="rounds-wrap">${rounds.map((round,ri)=>`<div>
     <div class="round-lbl">${names[ri]||'الجولة '+(ri+1)}</div>
     <div class="round-matches">${round.map((m,mi)=>`<div class="match-card">
-      <div class="m-team ${m.winner===0?'won':''}" ${editable?`onclick="setW(${ri},${mi},0)"`:''}><span>${m.teams[0]||'TBD'}</span>${m.winner===0?'<span>✅</span>':''}</div>
-      <div class="m-vs">VS</div>
-      <div class="m-team ${m.winner===1?'won':''}" ${editable?`onclick="setW(${ri},${mi},1)"`:''}>
-        <span>${m.teams[1]||'TBD'}</span>${m.winner===1?'<span>✅</span>':''}
-      </div></div>`).join('')}</div></div>`).join('')}</div>`;
+      <div class="m-team ${m.winner===0?'won':''}" ${editable?`onclick="setW(${ri},${mi},0)"`:''}style="${m.winner===0?'background:var(--success);color:#fff;font-weight:800;':m.winner===1?'opacity:.5;':''};padding:10px 14px;">
+        <span>${m.teams[0]||'TBD'}</span>${m.winner===0?'<span style="margin-right:6px;">✅</span>':''}
+      </div>
+      <div class="m-vs" style="font-weight:800;font-size:11px;color:var(--text-3);">${m.winner!==null?'🏆':'VS'}</div>
+      <div class="m-team ${m.winner===1?'won':''}" ${editable?`onclick="setW(${ri},${mi},1)"`:''}style="${m.winner===1?'background:var(--success);color:#fff;font-weight:800;':m.winner===0?'opacity:.5;':''};padding:10px 14px;">
+        <span>${m.teams[1]||'TBD'}</span>${m.winner===1?'<span style="margin-right:6px;">✅</span>':''}
+      </div>
+    </div>`).join('')}</div></div>`).join('')}</div>`;
 }
 
 /* ═══ MEMORIES USER ═══ */
@@ -2233,7 +2289,7 @@ async function injectDemoDishes(){
   if(!toAdd.length){toast('كل الأطباق موجودة');return}
   const rows=toAdd.map((f,i)=>{
     const ratings={};males.forEach(m=>{if(Math.random()>0.3)ratings[m.phone]=Math.floor(Math.random()*3)+3});
-    return{name:DEMO_DISH_NAMES[i%DEMO_DISH_NAMES.length],description:DEMO_DISH_DESCS[i%DEMO_DISH_DESCS.length],img:'',owner_phone:f.phone,owner_name:f.name,ratings,_demo:true};
+    return{name:DEMO_DISH_NAMES[i%DEMO_DISH_NAMES.length],description:DEMO_DISH_DESCS[i%DEMO_DISH_DESCS.length],img:'',owner_phone:f.phone,owner_name:f.name,ratings};
   });
   try{const r=await sbPost('dishes',rows);r.forEach(d=>_cache.dishes.push({...d,desc:d.description,ratings:d.ratings||{}}));}catch(e){toast('⚠️ خطأ');return;}
   renderAdmin();toast(`✅ تم إضافة ${rows.length} طبق تجريبي`);
@@ -2557,6 +2613,25 @@ function buildBracket(t){
   while(cur.length>1){const m=[];for(let i=0;i<cur.length;i+=2)m.push({teams:[cur[i],cur[i+1]],winner:null});rounds.push(m);cur=Array(cur.length/2).fill('TBD')}
   return rounds;
 }
+
+/* ══ كابتن + MVP ══ */
+async function setFootballCaptain(phone,name){
+  if(!confirm(`تعيين ${name} كابتناً؟`))return;
+  _cache.league=_cache.league||{};
+  await sbSetState('football_captain',{phone,name});
+  sv('football_captain',{phone,name});
+  renderAdmBracket();renderFootballUser();
+  toast(`✅ ${name} كابتن الفرق`);
+}
+async function setFootballMVP(phone,name){
+  if(!confirm(`تعيين ${name} أفضل لاعب؟`))return;
+  await sbSetState('football_mvp',{phone,name});
+  sv('football_mvp',{phone,name});
+  renderAdmBracket();renderFootballUser();
+  toast(`🏅 ${name} أفضل لاعب في البطولة`);
+}
+function getFootballCaptain(){return ld('football_captain')||null}
+function getFootballMVP(){return ld('football_mvp')||null}
 function renderAdmBracket(){
   const teams=genTeams();if(teams)renderAdmTeamsArea(teams);
   const isLeague=_cache.league;
@@ -2568,10 +2643,25 @@ function renderAdmBracket(){
     q('adm-bracket').innerHTML=br?`<div class="card"><div class="card-head">🏆 الخروج المباشر <span style="font-size:11px;color:var(--gray);font-weight:400;">(اضغط على الفريق للفوز)</span></div>${bracketHTML(br,true)}</div>`:'';
   }
 }
-window.setW=(ri,mi,ti)=>{
-  const br=bracket();if(!br)return;br[ri][mi].winner=ti;
-  if(ri+1<br.length){const nm=Math.floor(mi/2),ns=mi%2;if(br[ri+1][nm])br[ri+1][nm].teams[ns]=br[ri][mi].teams[ti]}
-  sv('bracket',br);renderAdmBracket();toast('✅ تم تحديد الفائز');
+window.setW=async(ri,mi,ti)=>{
+  const br=bracket();if(!br)return;
+  br[ri][mi].winner=ti;
+  // تقدم الفائز للجولة التالية
+  if(ri+1<=br.length-1){
+    const nm=Math.floor(mi/2),ns=mi%2;
+    if(br[ri+1]&&br[ri+1][nm])br[ri+1][nm].teams[ns]=br[ri][mi].teams[ti];
+  } else {
+    const winners=br[ri].filter(m=>m.winner!==null).map(m=>m.teams[m.winner]);
+    if(winners.length===br[ri].length&&winners.length>1){
+      const r=[];
+      for(let i=0;i<winners.length;i+=2)
+        r.push({teams:[winners[i],winners[i+1]||''],winner:null});
+      br.push(r);
+    }
+  }
+  _cache.bracket=br;
+  await sbSetState('bracket',br);
+  renderAdmBracket();renderFootballUser();toast('✅ تم تحديد الفائز');
 };
 
 /* ═══ ADMIN MEMORIES ═══ */
