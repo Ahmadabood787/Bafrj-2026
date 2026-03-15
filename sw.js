@@ -1,6 +1,5 @@
-// Service Worker — إستراحة آل بافرج
-const CACHE = 'bafrj-v1';
-const ASSETS = ['/Bafrj-2026/', '/Bafrj-2026/index.html'];
+const CACHE = 'bafrj-v3';
+const ASSETS = ['/', '/index.html'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -19,7 +18,6 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // للطلبات الخارجية (Supabase) — دائماً من الشبكة
   if (e.request.url.includes('supabase.co')) return;
   e.respondWith(
     fetch(e.request).catch(() => caches.match(e.request))
