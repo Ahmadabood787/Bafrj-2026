@@ -1325,12 +1325,27 @@ async function clearLoginLogo(){
   await clearAppSetting('loginLogo');
   applyLoginLogo();renderSettingsPanel();toast('🗑️ تم حذف الشعار');
 }
-function saveFavicon(e){
-  const file=e.target.files[0];if(!file)return;
-  compressImg(file,64,1.0,async data=>{
-    await saveAppSetting('favicon',data);
-    applyFavicon(data);renderSettingsPanel();toast('✅ تم حفظ الأيقونة لجميع المستخدمين');
-  });
+function saveFavicon(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // حماية: التأكد من أن حجم الملف لا يتجاوز 500 كيلوبايت حتى لا يثقل الموقع
+  if (file.size > 500 * 1024) {
+    toast('❌ حجم الصورة كبير جداً، يرجى رفع أيقونة أصغر');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async (event) => {
+    const data = event.target.result; // أخذ الصورة بجودتها الأصلية بدون ضغط
+    
+    await saveAppSetting('favicon', data);
+    applyFavicon(data);
+    renderSettingsPanel();
+    toast('✅ تم حفظ الأيقونة لجميع المستخدمين');
+  };
+  
+  reader.readAsDataURL(file);
 }
 async function clearFavicon(){
   await clearAppSetting('favicon');
